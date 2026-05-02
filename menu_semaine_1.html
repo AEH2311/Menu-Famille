@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Menu Semaine 1 — Famille</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg: #F7F4EF;
+      --card: #FFFFFF;
+      --green-deep: #2D5016;
+      --green-mid: #4A7C2F;
+      --green-light: #8DB87A;
+      --green-pale: #E8F0E1;
+      --amber: #C8841A;
+      --amber-pale: #FDF3E3;
+      --red-soft: #C0392B;
+      --text: #1A1A1A;
+      --text-muted: #6B6B6B;
+      --border: #E0DAD0;
+      --tag-express: #2D5016;
+      --tag-4ans: #C8841A;
+      --tag-batch: #4A7C2F;
+      --tag-transv: #5B8FA8;
+      --tag-antifr: #7B4FAB;
+      --shadow: 0 2px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--green-deep);
+      color: white;
+      padding: 20px 20px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    }
+    .header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .header p {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 2px;
+      font-weight: 300;
+    }
+
+    /* NAV TABS */
+    .nav {
+      display: flex;
+      background: var(--green-deep);
+      padding: 0 12px 12px;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      flex-shrink: 0;
+      min-height: 44px;
+      min-width: 72px;
+      padding: 8px 14px;
+      border: none;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .nav-btn.active {
+      background: white;
+      color: var(--green-deep);
+      font-weight: 600;
+    }
+
+    /* CONTENT */
+    .content { display: none; padding: 16px; max-width: 700px; margin: 0 auto; }
+    .content.active { display: block; }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--green-deep);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    /* CARDS */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    /* MENU TABLE */
+    .menu-day {
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .menu-day-header {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      gap: 12px;
+      background: var(--green-pale);
+    }
+    .day-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--green-deep);
+      min-width: 80px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .day-emoji { font-size: 20px; }
+    .day-time {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: auto;
+      background: white;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .menu-day-body {
+      padding: 12px 16px;
+    }
+    .menu-dish {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .tags-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      color: white;
+    }
+    .tag.express { background: var(--tag-express); }
+    .tag.enfant { background: var(--tag-4ans); }
+    .tag.batch { background: var(--tag-batch); }
+    .tag.transv { background: var(--tag-transv); }
+    .tag.antifr { background: var(--tag-antifr); }
+
+    /* BATCH SECTION */
+    .batch-option {
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--green-pale);
+      overflow: hidden;
+    }
+    .batch-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--green-pale);
+      cursor: pointer;
+    }
+    .batch-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+    .batch-letter.a { background: var(--green-deep); }
+    .batch-letter.b { background: var(--amber); }
+    .batch-title { font-weight: 700; font-size: 15px; }
+    .batch-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .batch-body { padding: 14px 16px; }
+    .batch-body p { font-size: 14px; line-height: 1.6; color: var(--text); margin-bottom: 8px; }
+    .batch-arrow {
+      margin-left: auto;
+      transition: transform 0.3s;
+      font-size: 16px;
+      color: var(--text-muted);
+    }
+    .batch-body { display: none; }
+    .batch-option.open .batch-body { display: block; }
+    .batch-option.open .batch-arrow { transform: rotate(180deg); }
+
+    /* RECIPE ACCORDION */
+    .recipe-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .recipe-header {
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .recipe-emoji { font-size: 24px; flex-shrink: 0; margin-top: 1px; }
+    .recipe-meta { flex: 1; }
+    .recipe-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--green-deep);
+      line-height: 1.3;
+    }
+    .recipe-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
+    .recipe-chevron {
+      font-size: 18px;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .recipe-card.open .recipe-chevron { transform: rotate(180deg); }
+    .recipe-body { display: none; padding: 0 16px 16px; }
+    .recipe-card.open .recipe-body { display: block; }
+
+    .why-box {
+      background: var(--green-pale);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--green-deep);
+      border-left: 3px solid var(--green-mid);
+    }
+
+    .recipe-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin: 14px 0 8px;
+    }
+
+    .ingredient-list { list-style: none; }
+    .ingredient-list li {
+      font-size: 14px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .ingredient-list li:last-child { border-bottom: none; }
+    .ing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green-light);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .ing-recycle { color: var(--tag-transv); font-size: 12px; }
+    .ing-brand { color: var(--text-muted); font-size: 12px; display: block; }
+
+    .steps-list { list-style: none; counter-reset: steps; }
+    .steps-list li {
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 8px 0 8px 36px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      counter-increment: steps;
+    }
+    .steps-list li:last-child { border-bottom: none; }
+    .steps-list li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 24px;
+      height: 24px;
+      background: var(--green-deep);
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .astuce-box {
+      background: var(--amber-pale);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-top: 12px;
+      font-size: 13px;
+      border-left: 3px solid var(--amber);
+      color: #5A3A0A;
+    }
+    .astuce-box strong { color: var(--amber); }
+
+    .friction-box {
+      background: #F0E8FF;
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #4A2080;
+      border-left: 3px solid var(--tag-antifr);
+    }
+
+    .synergy-box {
+      background: #E8F4FD;
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #1A3A5C;
+      border-left: 3px solid var(--tag-transv);
+    }
+
+    /* PLAN B */
+    .planb-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .planb-header {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .planb-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    .planb-badge.b1 { background: var(--green-deep); }
+    .planb-badge.b2 { background: var(--tag-transv); }
+    .planb-title { font-weight: 700; font-size: 16px; }
+    .planb-sub { font-size: 13px; color: var(--text-muted); }
+    .planb-body { padding: 0 16px 16px; }
+    .planb-body ol { list-style: none; counter-reset: pbsteps; padding: 0; }
+    .planb-body ol li {
+      counter-increment: pbsteps;
+      padding: 6px 0 6px 28px;
+      font-size: 14px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .planb-body ol li:last-child { border-bottom: none; }
+    .planb-body ol li::before {
+      content: counter(pbsteps);
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 20px;
+      height: 20px;
+      background: var(--green-light);
+      color: white;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .planb-ings {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .planb-ing {
+      font-size: 12px;
+      background: var(--green-pale);
+      color: var(--green-deep);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* SNACKS */
+    .snack-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .snack-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .snack-timing {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .snack-card p { font-size: 14px; line-height: 1.6; }
+
+    /* COURSES / CHECKLIST */
+    .courses-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .counter-badge {
+      background: var(--green-deep);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .reset-btn {
+      background: none;
+      border: 2px solid var(--red-soft);
+      color: var(--red-soft);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .cat-header {
+      background: var(--green-deep);
+      color: white;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 14px 0 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .course-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 14px;
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      margin-bottom: 4px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .course-item input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--green-mid);
+      flex-shrink: 0;
+      cursor: pointer;
+      margin-top: 1px;
+    }
+    .course-label { flex: 1; cursor: pointer; }
+    .course-name { font-size: 15px; font-weight: 500; line-height: 1.3; }
+    .course-usage {
+      display: block;
+      font-size: 12px;
+      color: var(--tag-transv);
+      font-style: italic;
+      margin-top: 2px;
+    }
+    .course-delhaize {
+      display: inline-block;
+      font-size: 11px;
+      background: #FDE8E8;
+      color: var(--red-soft);
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+    .course-planb {
+      display: inline-block;
+      font-size: 11px;
+      background: #E8F0E1;
+      color: var(--green-deep);
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-top: 3px;
+      margin-left: 3px;
+    }
+    .course-item.checked { opacity: 0.45; }
+    .course-item.checked .course-name { text-decoration: line-through; }
+
+    .budget-card {
+      background: var(--green-deep);
+      color: white;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .budget-label { font-size: 14px; opacity: 0.8; }
+    .budget-amount { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; }
+
+    /* DISCLAIMER */
+    .info-banner {
+      background: var(--amber-pale);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #5A3A0A;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--amber);
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 3px; }
+
+    /* ANIMATIONS */
+    .content.active {
+      animation: fadeUp 0.3s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .divider { height: 1px; background: var(--border); margin: 12px 0; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🌿 Menu Semaine 1</h1>
+  <p>4 personnes · Budget ~108€ · Belgique</p>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showTab('menu', this)">📅 Menu</button>
+  <button class="nav-btn" onclick="showTab('recettes', this)">👨‍🍳 Recettes</button>
+  <button class="nav-btn" onclick="showTab('batch', this)">🔄 Batch</button>
+  <button class="nav-btn" onclick="showTab('planb', this)">🆘 Plan B</button>
+  <button class="nav-btn" onclick="showTab('snacks', this)">🍎 Snacks</button>
+  <button class="nav-btn" onclick="showTab('courses', this)">🛒 Courses</button>
+</nav>
+
+<!-- ═══════════════ MENU ═══════════════ -->
+<div id="tab-menu" class="content active">
+  <p class="section-title">Semaine 1</p>
+
+  <div class="menu-day">
+    <div class="menu-day-header">
+      <span class="day-emoji">🍗</span>
+      <span class="day-name">Lundi</span>
+      <span class="day-time">⏱ 20 min</span>
+    </div>
+    <div class="menu-day-body">
+      <p class="menu-dish">Poulet tikka masala léger + riz basmati + raita concombre</p>
+      <div class="tags-row">
+        <span class="tag antifr">Anti-friction ✓</span>
+        <span class="tag express">Express 20min</span>
+        <span class="tag enfant">4 ans OK</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-day">
+    <div class="menu-day-header">
+      <span class="day-emoji">🐟</span>
+      <span class="day-name">Mardi</span>
+      <span class="day-time">⏱ 25 min</span>
+    </div>
+    <div class="menu-day-body">
+      <p class="menu-dish">Filets de saumon vapeur + quinoa citron-persil + tomates cerises</p>
+      <div class="tags-row">
+        <span class="tag antifr">Anti-friction ✓</span>
+        <span class="tag enfant">4 ans OK</span>
+        <span class="tag transv">Transversal ♻️</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-day">
+    <div class="menu-day-header">
+      <span class="day-emoji">🌮</span>
+      <span class="day-name">Mercredi</span>
+      <span class="day-time">⏱ 15 min</span>
+    </div>
+    <div class="menu-day-body">
+      <p class="menu-dish">Tacos effiloché poulet + salade chou rouge <em>— ou Plan B</em></p>
+      <div class="tags-row">
+        <span class="tag antifr">Anti-friction ✓</span>
+        <span class="tag batch">Batch ♻️</span>
+        <span class="tag enfant">4 ans OK</span>
+        <span class="tag express">Express 15min</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-day">
+    <div class="menu-day-header">
+      <span class="day-emoji">🫘</span>
+      <span class="day-name">Jeudi</span>
+      <span class="day-time">⏱ 25 min</span>
+    </div>
+    <div class="menu-day-body">
+      <p class="menu-dish">Croquettes pois chiches four + carottes rôties + tzatziki</p>
+      <div class="tags-row">
+        <span class="tag antifr">Anti-friction ✓</span>
+        <span class="tag enfant">4 ans OK</span>
+        <span class="tag transv">Transversal ♻️</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-day">
+    <div class="menu-day-header">
+      <span class="day-emoji">🐟</span>
+      <span class="day-name">Vendredi</span>
+      <span class="day-time">⏱ 35 min</span>
+    </div>
+    <div class="menu-day-body">
+      <p class="menu-dish">Truite papillote fenouil-citron + boulgour herbes + épinards</p>
+      <div class="tags-row">
+        <span class="tag transv">Transversal ♻️</span>
+        <span class="tag enfant">4 ans OK</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-day">
+    <div class="menu-day-header">
+      <span class="day-emoji">🎉</span>
+      <span class="day-name">Samedi</span>
+      <span class="day-time">Flexible</span>
+    </div>
+    <div class="menu-day-body">
+      <p class="menu-dish">Libre — restes / sortie / invités</p>
+      <div class="tags-row">
+        <span class="tag express">Liberté</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-day">
+    <div class="menu-day-header">
+      <span class="day-emoji">🍗</span>
+      <span class="day-name">Dimanche</span>
+      <span class="day-time">⏱ 50 min</span>
+    </div>
+    <div class="menu-day-body">
+      <p class="menu-dish">Poulet rôti + butternut rôtie <em>(Option A batch)</em><br>
+      <em style="font-size:13px;color:var(--text-muted)">ou Curry lentilles corail (Option B)</em></p>
+      <div class="tags-row">
+        <span class="tag batch">Batch ♻️</span>
+        <span class="tag enfant">4 ans OK</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-banner">
+    💡 <strong>Protéines semaine :</strong> Poulet (×2) · Saumon MSC · Truite MSC · Pois chiches (légumineuse) · Œufs. Viande rouge : 0 (disponible si envie semaine suivante).
+  </div>
+</div>
+
+<!-- ═══════════════ RECETTES ═══════════════ -->
+<div id="tab-recettes" class="content">
+  <p class="section-title">7 Recettes</p>
+
+  <!-- LUNDI -->
+  <div class="recipe-card" id="rec-lundi">
+    <div class="recipe-header" onclick="toggleRecipe('rec-lundi')">
+      <span class="recipe-emoji">🍗</span>
+      <div class="recipe-meta">
+        <p class="recipe-name">Poulet tikka masala léger</p>
+        <p class="recipe-subtitle">Lundi · 20 min · Anti-friction ✓</p>
+        <div class="tags-row" style="margin-top:6px">
+          <span class="tag antifr">Anti-friction ✓</span>
+          <span class="tag express">20min</span>
+          <span class="tag enfant">4 ans OK</span>
+        </div>
+      </div>
+      <span class="recipe-chevron">▼</span>
+    </div>
+    <div class="recipe-body">
+      <div class="why-box">
+        🌿 <strong>Pourquoi :</strong> Le curcuma est anti-inflammatoire — son absorption est multipliée ×20 avec du poivre noir. Le yaourt nature attendrit les protéines et apporte des probiotiques. Une porte d'entrée douce vers les épices pour les enfants.
+      </div>
+      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
+      <ul class="ingredient-list">
+        <li><span class="ing-dot"></span><div>600g filets poulet plein air<span class="ing-brand">Intermarché boucherie · Yuka ~85</span></div></li>
+        <li><span class="ing-dot"></span><div>200g yaourt nature entier ♻️ <span class="ing-recycle">→ aussi jeudi tzatziki + Plan B</span><span class="ing-brand">Pâturages Intermarché · Yuka 90</span></div></li>
+        <li><span class="ing-dot"></span><div>2 c.s. concentré tomates<span class="ing-brand">Mutti/Elvir · ingrédients : tomates+sel</span></div></li>
+        <li><span class="ing-dot"></span><div>Épices : 1 c.c. curcuma, 1 c.c. cumin, ½ c.c. paprika, ½ c.c. coriandre</div></li>
+        <li><span class="ing-dot"></span><div>1 oignon + 2 gousses ail</div></li>
+        <li><span class="ing-dot"></span><div>1 c.s. ghee ou huile avocat</div></li>
+        <li><span class="ing-dot"></span><div>300g riz basmati ♻️ <span class="ing-recycle">→ aussi mercredi enfant 4 ans</span><span class="ing-brand">Intermarché marque propre · Yuka 80</span></div></li>
+        <li><span class="ing-dot"></span><div>1 concombre ♻️ <span class="ing-recycle">→ aussi jeudi tzatziki + Plan B N°2</span></div></li>
+        <li><span class="ing-dot"></span><div>Persil frais ♻️ <span class="ing-recycle">→ aussi mardi + vendredi + Plan B N°1</span></div></li>
+        <li><span class="ing-dot"></span><div>½ citron ♻️ <span class="ing-recycle">→ utilisé toute la semaine</span></div></li>
+      </ul>
+      <p class="recipe-section-label">Étapes</p>
+      <ol class="steps-list">
+        <li>Couper le poulet en cubes (~3cm). Dans un bol : yaourt + concentré tomate + toutes les épices. Mélanger et enrober le poulet.</li>
+        <li>Faire revenir l'oignon émincé dans le ghee (poêle, feu moyen, 3 min). Ajouter l'ail haché, 1 min supplémentaire.</li>
+        <li>Ajouter le poulet mariné dans la poêle. Couvrir et cuire 12 min à feu moyen. Remuer à mi-cuisson.</li>
+        <li>Pendant ce temps : riz casserole (1 volume riz / 1,5 eau / couvercle / 12 min).</li>
+        <li>Raita express : râper le concombre, essorer légèrement, mélanger yaourt + concombre + jus citron + sel. 2 min.</li>
+      </ol>
+      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 2 cuissons actives (poêle + casserole) · 2 ustensiles · 1 découpe complexe (oignon)</div>
+      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Séparer 1-2 morceaux de poulet AVANT la marinade épicée. Cuire nature à la poêle 5 min. Servir avec riz blanc + bâtonnets concombre cru.</div>
+      <div class="synergy-box">💊 <strong>Synergie :</strong> Curcuma + poivre noir = biodisponibilité ×20. Riz basmati (index glycémique bas) + protéines poulet = énergie stable pour les enfants.</div>
+    </div>
+  </div>
+
+  <!-- MARDI -->
+  <div class="recipe-card" id="rec-mardi">
+    <div class="recipe-header" onclick="toggleRecipe('rec-mardi')">
+      <span class="recipe-emoji">🐟</span>
+      <div class="recipe-meta">
+        <p class="recipe-name">Saumon vapeur + quinoa citron-persil</p>
+        <p class="recipe-subtitle">Mardi · 25 min · Poisson gras · Anti-friction ✓</p>
+        <div class="tags-row" style="margin-top:6px">
+          <span class="tag antifr">Anti-friction ✓</span>
+          <span class="tag transv">Transversal ♻️</span>
+          <span class="tag enfant">4 ans OK</span>
+        </div>
+      </div>
+      <span class="recipe-chevron">▼</span>
+    </div>
+    <div class="recipe-body">
+      <div class="why-box">
+        🌿 <strong>Pourquoi :</strong> Le saumon MSC apporte les oméga-3 DHA/EPA essentiels au développement cérébral des enfants. La vapeur douce préserve ces acides gras fragiles (vs friture). Quinoa = protéine végétale complète avec tous les acides aminés essentiels.
+      </div>
+      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
+      <ul class="ingredient-list">
+        <li><span class="ing-dot"></span><div>4 filets saumon MSC ~150g<span class="ing-brand">Intermarché poissonnerie ou surgelés MSC · Yuka 88</span></div></li>
+        <li><span class="ing-dot"></span><div>200g quinoa blanc ♻️<span class="ing-brand">Priméal ou Intermarché bio · Yuka 92</span></div></li>
+        <li><span class="ing-dot"></span><div>1 bouquet persil frais ♻️ <span class="ing-recycle">→ aussi lundi raita + vendredi boulgour + Plan B N°1</span></div></li>
+        <li><span class="ing-dot"></span><div>2 citrons ♻️ <span class="ing-recycle">→ utilisés toute la semaine (6 au total)</span></div></li>
+        <li><span class="ing-dot"></span><div>250g tomates cerises bio ♻️ <span class="ing-recycle">→ aussi mercredi + Plan B N°2</span><span class="ing-brand">Intermarché bio · Yuka 95</span></div></li>
+        <li><span class="ing-dot"></span><div>1 c.s. huile d'olive · sel · poivre</div></li>
+      </ul>
+      <p class="recipe-section-label">Étapes</p>
+      <ol class="steps-list">
+        <li>Rincer le quinoa à l'eau froide. Dans une casserole : 1 volume quinoa + 1,5 eau froide. Porter à ébullition, puis feu doux couvercle, 15 min.</li>
+        <li>Poser les filets de saumon dans un panier vapeur (ou passoire sur casserole d'eau frémissante). Cuire 10-12 min selon épaisseur.</li>
+        <li>Pendant ce temps : tomates cerises dans un bol, filet huile d'olive, pincée sel. Pas de cuisson — fraîcheur conservée.</li>
+        <li>Quinoa cuit : égrener à la fourchette, mélanger persil haché + zeste d'1 citron + jus ½ citron + huile d'olive. Assaisonner.</li>
+        <li>Dresser : quinoa → saumon posé dessus → tomates cerises à côté.</li>
+      </ol>
+      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 1 cuisson active (vapeur + casserole empilées = 1 source) + cru tomates · 1 ustensile principal</div>
+      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Saumon sans assaisonnement (prendre avant finition). Si quinoa refusé → remplacer par riz blanc cuit en même temps. Tomates cerises entières = doigts.</div>
+      <div class="synergy-box">💊 <strong>Synergie :</strong> Oméga-3 saumon + vitamine C tomates = absorption maximale. Quinoa (protéine complète) + légumes crus = microbiote diversifié.</div>
+    </div>
+  </div>
+
+  <!-- MERCREDI -->
+  <div class="recipe-card" id="rec-mercredi">
+    <div class="recipe-header" onclick="toggleRecipe('rec-mercredi')">
+      <span class="recipe-emoji">🌮</span>
+      <div class="recipe-meta">
+        <p class="recipe-name">Tacos poulet effiloché + chou rouge</p>
+        <p class="recipe-subtitle">Mercredi · 15 min · Batch dimanche · Anti-friction ✓</p>
+        <div class="tags-row" style="margin-top:6px">
+          <span class="tag antifr">Anti-friction ✓</span>
+          <span class="tag batch">Batch ♻️</span>
+          <span class="tag express">15min</span>
+          <span class="tag enfant">4 ans OK</span>
+        </div>
+      </div>
+      <span class="recipe-chevron">▼</span>
+    </div>
+    <div class="recipe-body">
+      <div class="why-box">
+        🌿 <strong>Pourquoi :</strong> Transformation intelligente du batch. Le chou rouge cru est une bombe d'anthocyanes et de vitamine C. Assemblage festif que les enfants adorent composer eux-mêmes — meilleure acceptation des nouveaux aliments.
+      </div>
+      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
+      <ul class="ingredient-list">
+        <li><span class="ing-dot"></span><div>~350g poulet effiloché ♻️ <span class="ing-recycle">→ reste batch dimanche (décongelé mardi soir)</span></div></li>
+        <li><span class="ing-dot"></span><div>¼ chou rouge ♻️ <span class="ing-recycle">→ acheté pour cette semaine, reste = jeudi bâtonnets snack</span></div></li>
+        <li><span class="ing-dot"></span><div>6-8 tortillas blé ou pains pita<span class="ing-brand">Intermarché — vérifier : farine+eau+sel+levure uniquement</span></div></li>
+        <li><span class="ing-dot"></span><div>150g yaourt nature ♻️ + ½ citron ♻️ + pincée cumin = sauce express</div></li>
+        <li><span class="ing-dot"></span><div>Reste tomates cerises bio ♻️ <span class="ing-recycle">→ reste mardi</span></div></li>
+      </ul>
+      <p class="recipe-section-label">Étapes</p>
+      <ol class="steps-list">
+        <li>Le poulet a été décongelé mardi soir. Le réchauffer dans une poêle avec 1 c.s. d'eau, 5 min.</li>
+        <li>Émincer finement ¼ chou rouge (2 min). Conserver le reste en réfrigérateur pour bâtonnets snack.</li>
+        <li>Sauce express : yaourt + jus citron + pincée cumin + sel. Mélanger 30 secondes.</li>
+        <li>Assembler à table : chacun garnit son taco. Ambiance!</li>
+      </ol>
+      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 1 cuisson active (réchauffage poêle) + assemblage cru · 1 ustensile</div>
+      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Pain pita ouvert + poulet nature + tomates cerises + bâtonnets concombre à côté. Laisser assembler seul = autonomie et plaisir.</div>
+      <div class="synergy-box">💊 <strong>Synergie :</strong> Anthocyanes chou rouge = antioxydants puissants. Probiotiques yaourt + fibres chou = microbiote renforcé.</div>
+    </div>
+  </div>
+
+  <!-- JEUDI -->
+  <div class="recipe-card" id="rec-jeudi">
+    <div class="recipe-header" onclick="toggleRecipe('rec-jeudi')">
+      <span class="recipe-emoji">🫘</span>
+      <div class="recipe-meta">
+        <p class="recipe-name">Croquettes pois chiches four + carottes + tzatziki</p>
+        <p class="recipe-subtitle">Jeudi · 25 min · Légumineuses · Anti-friction ✓</p>
+        <div class="tags-row" style="margin-top:6px">
+          <span class="tag antifr">Anti-friction ✓</span>
+          <span class="tag transv">Transversal ♻️</span>
+          <span class="tag enfant">4 ans OK</span>
+        </div>
+      </div>
+      <span class="recipe-chevron">▼</span>
+    </div>
+    <div class="recipe-body">
+      <div class="why-box">
+        🌿 <strong>Pourquoi :</strong> Les pois chiches sont riches en protéines végétales, fer et zinc. La vitamine C des carottes triple l'absorption du fer non-héminique. Cuisson four = zéro surveillance pendant 20 min pour s'occuper des enfants.
+      </div>
+      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
+      <ul class="ingredient-list">
+        <li><span class="ing-dot"></span><div>2 boîtes/bocaux pois chiches ♻️ <span class="ing-recycle">→ 3ème boîte pour houmous snack + Plan B N°2</span><span class="ing-brand">Intermarché — pois chiches+eau+sel uniquement · Yuka 90</span></div></li>
+        <li><span class="ing-dot"></span><div>1 œuf plein air (liant)<span class="ing-brand">Pâturages Intermarché · Yuka 92</span></div></li>
+        <li><span class="ing-dot"></span><div>3 c.s. farine semi-complète<span class="ing-brand">Intermarché · Yuka 82</span></div></li>
+        <li><span class="ing-dot"></span><div>Épices : 1 c.c. cumin, ½ c.c. paprika, ½ c.c. coriandre, sel</div></li>
+        <li><span class="ing-dot"></span><div>500g carottes ♻️ <span class="ing-recycle">→ aussi bâtonnets snack enfants + dimanche rôties</span></div></li>
+        <li><span class="ing-dot"></span><div>Tzatziki : concombre ♻️ (reste lundi) + 150g yaourt ♻️ + ail + citron ♻️ + menthe fraîche ♻️</div></li>
+        <li><span class="ing-dot"></span><div>Huile d'olive pour la plaque</div></li>
+      </ul>
+      <p class="recipe-section-label">Étapes</p>
+      <ol class="steps-list">
+        <li>Four à 200°C. Huiler une plaque de cuisson.</li>
+        <li>Égoutter et rincer les pois chiches. Les écraser à la fourchette (texture grossière = meilleure croquette). Ajouter œuf + farine + épices. Bien mélanger.</li>
+        <li>Former 12 galettes (~2cm d'épaisseur). Les poser sur la plaque. Enfourner 20 min, retourner à mi-cuisson.</li>
+        <li>Carottes en rondelles épaisses : sur la même plaque (autre moitié), huile + sel. Four simultané.</li>
+        <li>Tzatziki : concombre râpé, bien essorer à la main, mélanger yaourt + ail écrasé + citron + menthe + sel. Prêt en 2 min.</li>
+      </ol>
+      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 1 cuisson active (four, 1 plaque) + cru tzatziki · 1 ustensile · 0 découpe complexe</div>
+      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Croquettes sans épices (séparer portion avant d'assaisonner). Carottes rôties douces = généralement adorées. Yaourt nature comme trempette (sans ail si refus).</div>
+      <div class="synergy-box">💊 <strong>Synergie :</strong> Fer pois chiches + vitamine C carottes = absorption fer ×3. Yaourt probiotique + fibres légumineuses = microbiote diversifié.</div>
+    </div>
+  </div>
+
+  <!-- VENDREDI -->
+  <div class="recipe-card" id="rec-vendredi">
+    <div class="recipe-header" onclick="toggleRecipe('rec-vendredi')">
+      <span class="recipe-emoji">🐟</span>
+      <div class="recipe-meta">
+        <p class="recipe-name">Truite papillote fenouil-citron + boulgour herbes</p>
+        <p class="recipe-subtitle">Vendredi · 35 min · Poisson gras · Assoupli</p>
+        <div class="tags-row" style="margin-top:6px">
+          <span class="tag transv">Transversal ♻️</span>
+          <span class="tag enfant">4 ans OK</span>
+        </div>
+      </div>
+      <span class="recipe-chevron">▼</span>
+    </div>
+    <div class="recipe-body">
+      <div class="why-box">
+        🌿 <strong>Pourquoi :</strong> La truite = deuxième poisson gras de la semaine (objectif 1×/semaine respecté). La papillote est la cuisson la plus douce — zéro corps gras ajouté, tous les nutriments conservés. Le fenouil facilite la digestion et introduit une saveur anisée nouvelle.
+      </div>
+      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
+      <ul class="ingredient-list">
+        <li><span class="ing-dot"></span><div>4 filets truite arc-en-ciel MSC<span class="ing-brand">Intermarché frais ou surgelés MSC · Yuka 88</span></div></li>
+        <li><span class="ing-dot"></span><div>1 fenouil (seule découpe complexe)</div></li>
+        <li><span class="ing-dot"></span><div>2 citrons ♻️ <span class="ing-recycle">→ rondelles papillote + jus boulgour</span></div></li>
+        <li><span class="ing-dot"></span><div>200g boulgour<span class="ing-brand">Celnat ou Intermarché · Yuka 88</span></div></li>
+        <li><span class="ing-dot"></span><div>150g épinards frais bio<span class="ing-brand">Intermarché bio · Yuka 95</span></div></li>
+        <li><span class="ing-dot"></span><div>Persil frais ♻️ + menthe fraîche ♻️ <span class="ing-recycle">→ restes de la semaine</span></div></li>
+        <li><span class="ing-dot"></span><div>Huile d'olive · sel · poivre</div></li>
+      </ul>
+      <p class="recipe-section-label">Étapes</p>
+      <ol class="steps-list">
+        <li>Four à 180°C. Émincer le fenouil finement (2-3 min).</li>
+        <li>Couper 4 grands rectangles de papier cuisson. Sur chacun : lit de fenouil + filet de truite + 2 rondelles citron + sel + poivre + filet huile olive. Fermer en aumônière hermétique.</li>
+        <li>Enfourner les papillotes : 20 min.</li>
+        <li>Pendant ce temps : boulgour dans casserole — couvrir d'eau bouillante à hauteur + 2cm, couvercle, 10 min hors feu.</li>
+        <li>Épinards : soit poêle 2 min avec ail + huile, soit crus à côté (si fatigue du vendredi!).</li>
+        <li>Boulgour égoutté : mélanger persil + menthe + jus citron + huile olive.</li>
+      </ol>
+      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Truite nature sans fenouil (retirer avant de fermer papillote). Proposer pâtes ou riz si boulgour refusé. Épinards crus avec un filet citron = souvent mieux acceptés.</div>
+      <div class="synergy-box">💊 <strong>Synergie :</strong> Oméga-3 truite + vitamine K épinards = santé cardiovasculaire optimale. Herbes fraîches = phytonutriments et digestion facilitée. Boulgour semi-complet = fibres pour microbiote.</div>
+    </div>
+  </div>
+
+  <!-- DIMANCHE -->
+  <div class="recipe-card" id="rec-dimanche">
+    <div class="recipe-header" onclick="toggleRecipe('rec-dimanche')">
+      <span class="recipe-emoji">🍗</span>
+      <div class="recipe-meta">
+        <p class="recipe-name">Poulet rôti + butternut rôtie (batch)</p>
+        <p class="recipe-subtitle">Dimanche · 50 min · Option A · Batch mercredi</p>
+        <div class="tags-row" style="margin-top:6px">
+          <span class="tag batch">Batch ♻️</span>
+          <span class="tag transv">Transversal ♻️</span>
+          <span class="tag enfant">4 ans OK</span>
+        </div>
+      </div>
+      <span class="recipe-chevron">▼</span>
+    </div>
+    <div class="recipe-body">
+      <div class="why-box">
+        🌿 <strong>Pourquoi :</strong> Le grand classique familial. Une plaque = repas complet + batch sécurisé. La butternut rôtie caramélise naturellement grâce à ses sucres — texture fondante adorée des enfants. Investissement 50 min dimanche = mercredi sauvé en 15 min.
+      </div>
+      <p class="recipe-section-label">Ingrédients (4 pers. + batch)</p>
+      <ul class="ingredient-list">
+        <li><span class="ing-dot"></span><div>1 poulet entier ~1,5kg plein air ♻️ <span class="ing-recycle">→ ≈30% effiloché → batch mercredi</span><span class="ing-brand">Intermarché boucherie · Yuka 85</span></div></li>
+        <li><span class="ing-dot"></span><div>1 butternut entière ♻️ <span class="ing-recycle">→ ≈30% cubes → batch mercredi bowl/soupe</span></div></li>
+        <li><span class="ing-dot"></span><div>4 gousses ail + thym frais + romarin</div></li>
+        <li><span class="ing-dot"></span><div>3 c.s. ghee ou huile avocat · paprika · sel · poivre</div></li>
+        <li><span class="ing-dot"></span><div>Option : oignons ♻️ + carottes ♻️ <span class="ing-recycle">→ restes de la semaine autour du poulet</span></div></li>
+      </ul>
+      <p class="recipe-section-label">Étapes</p>
+      <ol class="steps-list">
+        <li>Four à 200°C. Éplucher et couper la butternut en cubes ~3cm. Placer sur grande plaque huilée avec thym + sel.</li>
+        <li>Frotter le poulet entier : ghee fondu + paprika + sel + ail écrasé partout (sous la peau si possible). Poser sur la plaque ou plaque séparée.</li>
+        <li>Enfourner : butternut 35-40 min, poulet 45-50 min (jusqu'à jus clair). Même four simultané.</li>
+        <li>⚠️ BATCH : Avant de servir, effilocher environ ⅓ du poulet et mettre de côté ~200g cubes butternut. Placer dans boîte hermétique.</li>
+        <li>Congeler la portion batch ce soir même. Décongeler mardi soir au frigo.</li>
+      </ol>
+      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Cuisse/pilon entier = prise en main naturelle. Butternut rôtie sucrée-fondante = généralement très bien acceptée. Servir nature sans sauce.</div>
+      <div class="synergy-box">💊 <strong>Synergie :</strong> Protéines poulet complet + bêta-carotène butternut (vitamine A, immunité) + graisses ghee (absorption liposolubles). Repas anti-gaspi par excellence.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ BATCH ═══════════════ -->
+<div id="tab-batch" class="content">
+  <p class="section-title">Dimanche — Stratégie Batch</p>
+
+  <div class="info-banner">
+    🧘 <strong>Règle d'or :</strong> Choisir selon ta forme du dimanche matin. Les deux options sont bonnes. Zéro pression = engagement long terme.
+  </div>
+
+  <div class="batch-option open" id="batch-a">
+    <div class="batch-header" onclick="toggleBatch('batch-a')">
+      <span class="batch-letter a">A</span>
+      <div>
+        <p class="batch-title">Poulet rôti + Butternut rôtie</p>
+        <p class="batch-subtitle">Option recommandée · 50 min · Mercredi sécurisé</p>
+      </div>
+      <span class="batch-arrow">▼</span>
+    </div>
+    <div class="batch-body">
+      <p>🍗 <strong>Dimanche :</strong> Poulet entier rôti + butternut en cubes sur la même plaque four. Repas classique délicieux.</p>
+      <p>♻️ <strong>Batch à prévoir :</strong> Avant de servir, effilocher ~350g poulet + réserver ~200g butternut cuites. Dans une boîte hermétique → congélateur dimanche soir.</p>
+      <p>🌮 <strong>Mercredi (15 min) :</strong> Décongeler mardi soir. Réchauffer le poulet à la poêle. Assembler tacos avec chou rouge émincé + sauce yaourt-citron. Butternut : réchauffer ou servir froide en bowl.</p>
+      <div class="tags-row" style="margin-top:10px">
+        <span class="tag batch">Mercredi garanti</span>
+        <span class="tag express">15min mercredi</span>
+        <span class="tag transv">Anti-gaspi ♻️</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="batch-option" id="batch-b">
+    <div class="batch-header" onclick="toggleBatch('batch-b')">
+      <span class="batch-letter b">B</span>
+      <div>
+        <p class="batch-title">Curry lentilles corail one-pot</p>
+        <p class="batch-subtitle">Si fatigue · 40 min · Mercredi = Plan B</p>
+      </div>
+      <span class="batch-arrow">▼</span>
+    </div>
+    <div class="batch-body">
+      <p>🍛 <strong>Dimanche :</strong> Curry de lentilles corail en one-pot (lentilles + lait coco + tomates + épices). Repas complet, chaud, réconfortant. Pas de batch.</p>
+      <p>🆘 <strong>Mercredi :</strong> Utiliser Plan B N°1 (pâtes citron-parmesan) ou Plan B N°2 (bowl froid pois chiches). Ingrédients déjà dans les placards.</p>
+      <p>💡 <strong>Ingrédients supplémentaires si Option B :</strong> Lentilles corail 300g + lait de coco 1 boîte + tomates concassées 1 boîte (vérifier ingrédients).</p>
+      <div class="tags-row" style="margin-top:10px">
+        <span class="tag enfant">Sans pression</span>
+        <span class="tag express">One-pot</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:8px; border-left: 4px solid var(--green-mid);">
+    <p style="font-size:13px; line-height:1.6; color:var(--text-muted);">
+      <strong style="color:var(--green-deep)">🔄 Flux batch en détail :</strong><br>
+      Dimanche soir → congeler portion mercredi<br>
+      Mardi soir → transférer au frigo (décongélation lente = meilleure texture)<br>
+      Mercredi → réchauffer 5 min + assembler = repas en 15 min chrono
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════ PLAN B ═══════════════ -->
+<div id="tab-planb" class="content">
+  <p class="section-title">🆘 Jokers Semaine</p>
+
+  <div class="info-banner">
+    Ces 2 plans B utilisent UNIQUEMENT des ingrédients de la liste de courses. Aucun achat supplémentaire.
+  </div>
+
+  <div class="planb-card">
+    <div class="planb-header">
+      <div class="planb-badge b1">🔥</div>
+      <div>
+        <p class="planb-title">Plan B N°1 — Chaud</p>
+        <p class="planb-sub">Pâtes citron-parmesan-persil · 10 min</p>
+      </div>
+    </div>
+    <div class="planb-body">
+      <ol>
+        <li>Porter eau à ébullition. Cuire pâtes semi-complètes 8 min.</li>
+        <li>Égoutter en conservant 2 c.s. eau de cuisson.</li>
+        <li>Dans la casserole : pâtes + huile d'olive généreuse + zeste et jus d'1 citron + eau cuisson.</li>
+        <li>Parmesan râpé + persil haché + sel + poivre. Mélanger vivement. Servir.</li>
+      </ol>
+      <p style="font-size:13px; color:var(--text-muted); margin-top:10px; font-style:italic;">Variante 4 ans : pâtes nature + parmesan sans citron si refus d'acidité.</p>
+      <div class="planb-ings">
+        <span class="planb-ing">Pâtes semi-complètes</span>
+        <span class="planb-ing">Citron ♻️</span>
+        <span class="planb-ing">Parmesan</span>
+        <span class="planb-ing">Persil ♻️</span>
+        <span class="planb-ing">Huile d'olive</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="planb-card">
+    <div class="planb-header">
+      <div class="planb-badge b2">❄️</div>
+      <div>
+        <p class="planb-title">Plan B N°2 — Froid</p>
+        <p class="planb-sub">Bowl pois chiches-crudités · 0 cuisson · 8 min</p>
+      </div>
+    </div>
+    <div class="planb-body">
+      <ol>
+        <li>Ouvrir et égoutter pois chiches. Rincer à l'eau froide.</li>
+        <li>Couper tomates cerises en deux, trancher concombre.</li>
+        <li>Vinaigrette express : huile olive + jus citron + pincée cumin + sel.</li>
+        <li>Assembler : pois chiches + tomates + concombre + vinaigrette. Ajouter feta si disponible.</li>
+        <li>Servir avec pain pita ou pain au levain.</li>
+      </ol>
+      <p style="font-size:13px; color:var(--text-muted); margin-top:10px; font-style:italic;">4 ans : pois chiches + tomates cerises + concombre + yaourt nature = assiette simple acceptée.</p>
+      <div class="planb-ings">
+        <span class="planb-ing">Pois chiches ♻️</span>
+        <span class="planb-ing">Tomates cerises ♻️</span>
+        <span class="planb-ing">Concombre ♻️</span>
+        <span class="planb-ing">Citron ♻️</span>
+        <span class="planb-ing">Feta (option)</span>
+        <span class="planb-ing">Pain pita</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background: var(--green-pale); border: none;">
+    <p style="font-size:13px; line-height:1.7; color:var(--green-deep);">
+      <strong>📦 Ces ingrédients servent aussi aux Plans B :</strong><br>
+      Pâtes semi-complètes · Pois chiches (3ème boîte) · Citrons × 6 · Persil ♻️ · Parmesan · Tomates cerises ♻️ · Concombre ♻️ · Pain pita
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════ SNACKS ═══════════════ -->
+<div id="tab-snacks" class="content">
+  <p class="section-title">🍎 Snacks Enfants</p>
+  <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">2 idées liées aux ingrédients déjà achetés. Zéro achat supplémentaire.</p>
+
+  <div class="snack-card">
+    <p class="snack-title">🥕 Snack 1 — Carottes & houmous maison express</p>
+    <p class="snack-timing">Jeudi après-midi ou vendredi · 5 min de préparation</p>
+    <p>Utiliser la 3ème boîte de pois chiches de la liste. Mixer avec tahini (Delhaize) + jus citron + ail + sel + 2 c.s. eau froide. Servir avec bâtonnets de carottes coupés en avance.</p>
+    <div class="tags-row" style="margin-top:10px">
+      <span class="tag transv">Utilise restes ♻️</span>
+      <span class="tag enfant">4 ans OK</span>
+      <span class="tag express">5 min</span>
+    </div>
+    <div class="astuce-box" style="margin-top:10px"><strong>💡 Astuce :</strong> Préparer le houmous en avance (lundi soir). Se conserve 4 jours au frigo. Les bâtonnets de carottes sont découpés lors de la préparation du jeudi soir.</div>
+  </div>
+
+  <div class="snack-card">
+    <p class="snack-title">🍓 Snack 2 — Yaourt nature + fraises bio + miel</p>
+    <p class="snack-timing">Mardi ou mercredi · 2 min</p>
+    <p>Yaourt Pâturages (déjà acheté) + fraises bio Intermarché lavées et coupées + ½ c.c. miel pur. Assembler directement dans le bol du petit. Fraises de saison en Belgique (avril-juin ✅).</p>
+    <div class="tags-row" style="margin-top:10px">
+      <span class="tag transv">Ingrédients liste ♻️</span>
+      <span class="tag enfant">4 ans OK</span>
+      <span class="tag express">2 min</span>
+    </div>
+    <div class="astuce-box" style="margin-top:10px"><strong>💡 Astuce :</strong> Laisser les enfants "décorer" leur bol avec les fraises = implication + meilleure acceptation. Pas de sucre blanc — le miel suffit en micro-dose.</div>
+  </div>
+</div>
+
+<!-- ═══════════════ COURSES ═══════════════ -->
+<div id="tab-courses" class="content">
+  <div class="courses-header">
+    <p class="section-title" style="margin:0">🛒 Liste de courses</p>
+    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+      <span class="counter-badge" id="counter">0/37 achetés</span>
+      <button class="reset-btn" onclick="resetAll()">Tout décocher</button>
+    </div>
+  </div>
+
+  <div class="cat-header">🥩 Viandes & Poissons</div>
+
+  <div class="course-item" id="ci-01" onclick="toggleItem('ci-01')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-01')">
+    <div class="course-label">
+      <p class="course-name">Poulet entier plein air ~1,5kg</p>
+      <span class="course-usage">→ Dimanche batch + mercredi effiloché</span>
+      <span class="course-planb">Batch ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-02" onclick="toggleItem('ci-02')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-02')">
+    <div class="course-label">
+      <p class="course-name">Filets poulet plein air 600g</p>
+      <span class="course-usage">→ Lundi tikka masala</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-03" onclick="toggleItem('ci-03')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-03')">
+    <div class="course-label">
+      <p class="course-name">Filets saumon MSC 4×150g</p>
+      <span class="course-usage">→ Mardi vapeur · vérifier logo MSC</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-04" onclick="toggleItem('ci-04')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-04')">
+    <div class="course-label">
+      <p class="course-name">Filets truite arc-en-ciel MSC 4×</p>
+      <span class="course-usage">→ Vendredi papillote · frais ou surgelés</span>
+    </div>
+  </div>
+
+  <div class="cat-header">🥚 Œufs & Laitiers</div>
+
+  <div class="course-item" id="ci-05" onclick="toggleItem('ci-05')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-05')">
+    <div class="course-label">
+      <p class="course-name">Œufs plein air ×6</p>
+      <span class="course-usage">→ Jeudi croquettes liant</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-06" onclick="toggleItem('ci-06')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-06')">
+    <div class="course-label">
+      <p class="course-name">Yaourt nature entier ×6 pots (Pâturages)</p>
+      <span class="course-usage">→ Lundi raita + jeudi tzatziki + snack + Plan B</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-07" onclick="toggleItem('ci-07')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-07')">
+    <div class="course-label">
+      <p class="course-name">Parmesan râpé ou bloc 100g</p>
+      <span class="course-usage">→ Plan B N°1 pâtes citron</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-08" onclick="toggleItem('ci-08')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-08')">
+    <div class="course-label">
+      <p class="course-name">Feta 150g (optionnel)</p>
+      <span class="course-usage">→ Plan B N°2 bowl froid</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="cat-header">🌾 Féculents & Légumineuses</div>
+
+  <div class="course-item" id="ci-09" onclick="toggleItem('ci-09')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-09')">
+    <div class="course-label">
+      <p class="course-name">Riz basmati 500g</p>
+      <span class="course-usage">→ Lundi + mercredi enfant</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-10" onclick="toggleItem('ci-10')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-10')">
+    <div class="course-label">
+      <p class="course-name">Quinoa blanc 400g (Priméal)</p>
+      <span class="course-usage">→ Mardi saumon</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-11" onclick="toggleItem('ci-11')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-11')">
+    <div class="course-label">
+      <p class="course-name">Boulgour 300g</p>
+      <span class="course-usage">→ Vendredi truite</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-12" onclick="toggleItem('ci-12')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-12')">
+    <div class="course-label">
+      <p class="course-name">Pâtes semi-complètes 500g</p>
+      <span class="course-usage">→ Plan B N°1 · vérifier ingrédients simples</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-13" onclick="toggleItem('ci-13')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-13')">
+    <div class="course-label">
+      <p class="course-name">Pois chiches ×3 boîtes/bocaux</p>
+      <span class="course-usage">→ Jeudi (×2) + snack houmous (×1) + Plan B N°2</span>
+      <span class="course-planb">Plan B + Snack ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-14" onclick="toggleItem('ci-14')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-14')">
+    <div class="course-label">
+      <p class="course-name">Tortillas blé ou pains pita ×8</p>
+      <span class="course-usage">→ Mercredi tacos + Plan B N°2</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="cat-header">🥦 Légumes Frais</div>
+
+  <div class="course-item" id="ci-15" onclick="toggleItem('ci-15')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-15')">
+    <div class="course-label">
+      <p class="course-name">Butternut ×1 entière</p>
+      <span class="course-usage">→ Dimanche rôtie + mercredi batch bowl</span>
+      <span class="course-planb">Batch ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-16" onclick="toggleItem('ci-16')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-16')">
+    <div class="course-label">
+      <p class="course-name">Fenouil ×1</p>
+      <span class="course-usage">→ Vendredi papillote</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-17" onclick="toggleItem('ci-17')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-17')">
+    <div class="course-label">
+      <p class="course-name">Chou rouge ×1 petit</p>
+      <span class="course-usage">→ Mercredi tacos + snack bâtonnets</span>
+      <span class="course-planb">Snack ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-18" onclick="toggleItem('ci-18')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-18')">
+    <div class="course-label">
+      <p class="course-name">Carottes 1kg</p>
+      <span class="course-usage">→ Jeudi rôties + snack bâtonnets + dimanche option</span>
+      <span class="course-planb">Snack ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-19" onclick="toggleItem('ci-19')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-19')">
+    <div class="course-label">
+      <p class="course-name">Concombre ×2</p>
+      <span class="course-usage">→ Lundi raita + jeudi tzatziki + Plan B N°2</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-20" onclick="toggleItem('ci-20')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-20')">
+    <div class="course-label">
+      <p class="course-name">Tomates cerises bio 500g</p>
+      <span class="course-usage">→ Mardi + mercredi + Plan B N°2</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-21" onclick="toggleItem('ci-21')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-21')">
+    <div class="course-label">
+      <p class="course-name">Épinards frais bio 150g</p>
+      <span class="course-usage">→ Vendredi truite</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-22" onclick="toggleItem('ci-22')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-22')">
+    <div class="course-label">
+      <p class="course-name">Oignons ×3</p>
+      <span class="course-usage">→ Lundi tikka + dimanche poulet</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-23" onclick="toggleItem('ci-23')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-23')">
+    <div class="course-label">
+      <p class="course-name">Ail ×1 tête</p>
+      <span class="course-usage">→ Lundi + jeudi + vendredi + dimanche</span>
+    </div>
+  </div>
+
+  <div class="cat-header">🌿 Herbes Fraîches</div>
+
+  <div class="course-item" id="ci-24" onclick="toggleItem('ci-24')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-24')">
+    <div class="course-label">
+      <p class="course-name">Persil frais ×1 bouquet</p>
+      <span class="course-usage">→ Mardi + vendredi + Plan B N°1</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-25" onclick="toggleItem('ci-25')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-25')">
+    <div class="course-label">
+      <p class="course-name">Menthe fraîche ×1 bouquet</p>
+      <span class="course-usage">→ Jeudi tzatziki + vendredi boulgour</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-26" onclick="toggleItem('ci-26')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-26')">
+    <div class="course-label">
+      <p class="course-name">Thym + romarin (frais ou séchés)</p>
+      <span class="course-usage">→ Dimanche poulet rôti</span>
+    </div>
+  </div>
+
+  <div class="cat-header">🍋 Fruits</div>
+
+  <div class="course-item" id="ci-27" onclick="toggleItem('ci-27')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-27')">
+    <div class="course-label">
+      <p class="course-name">Citrons ×6</p>
+      <span class="course-usage">→ Vinaigrettes + marinades + Plan B N°1 + toute la semaine</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-28" onclick="toggleItem('ci-28')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-28')">
+    <div class="course-label">
+      <p class="course-name">Fraises bio 250g</p>
+      <span class="course-usage">→ Snack enfants yaourt-fraises · saisonnières ✅</span>
+      <span class="course-planb">Snack ♻️</span>
+    </div>
+  </div>
+
+  <div class="cat-header">🫙 Épicerie & Condiments</div>
+
+  <div class="course-item" id="ci-29" onclick="toggleItem('ci-29')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-29')">
+    <div class="course-label">
+      <p class="course-name">Concentré tomates 1 tube (Mutti)</p>
+      <span class="course-usage">→ Lundi tikka · vérifier : tomates+sel uniquement</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-30" onclick="toggleItem('ci-30')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-30')">
+    <div class="course-label">
+      <p class="course-name">Huile d'olive 500ml (Itinéraire des Saveurs)</p>
+      <span class="course-usage">→ Finitions toute la semaine</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-31" onclick="toggleItem('ci-31')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-31')">
+    <div class="course-label">
+      <p class="course-name">Ghee ou huile avocat 200ml</p>
+      <span class="course-usage">→ Lundi poêle + dimanche poulet</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-32" onclick="toggleItem('ci-32')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-32')">
+    <div class="course-label">
+      <p class="course-name">Épices : curcuma, cumin, paprika, coriandre moulue</p>
+      <span class="course-usage">→ Lundi + jeudi + partout</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-33" onclick="toggleItem('ci-33')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-33')">
+    <div class="course-label">
+      <p class="course-name">Farine semi-complète 500g</p>
+      <span class="course-usage">→ Jeudi croquettes pois chiches</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-34" onclick="toggleItem('ci-34')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-34')">
+    <div class="course-label">
+      <p class="course-name">Miel pur 1 petit pot</p>
+      <span class="course-usage">→ Snack yaourt-fraises · miel pur = OK</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-35" onclick="toggleItem('ci-35')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-35')">
+    <div class="course-label">
+      <p class="course-name">Pain au levain artisanal</p>
+      <span class="course-usage">→ Plans B + repas libres</span>
+      <span class="course-planb">Plan B ♻️</span>
+    </div>
+  </div>
+
+  <div class="cat-header" style="background: var(--red-soft);">🏪 Compléments Delhaize</div>
+
+  <div class="course-item" id="ci-36" onclick="toggleItem('ci-36')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-36')">
+    <div class="course-label">
+      <p class="course-name">Tahini Al'Fez 250g</p>
+      <span class="course-usage">→ Snack houmous maison enfants</span>
+      <span class="course-delhaize">Delhaize</span>
+      <span class="course-planb">Snack ♻️</span>
+    </div>
+  </div>
+
+  <div class="course-item" id="ci-37" onclick="toggleItem('ci-37')">
+    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-37')">
+    <div class="course-label">
+      <p class="course-name">Ghee (si non disponible Intermarché)</p>
+      <span class="course-usage">→ Alternative cuisson haute température</span>
+      <span class="course-delhaize">Delhaize si besoin</span>
+    </div>
+  </div>
+
+  <div class="budget-card">
+    <div>
+      <p class="budget-label">Budget estimé</p>
+      <p style="font-size:12px; opacity:0.6; margin-top:2px;">Intermarché ~88€ + Delhaize ~20€</p>
+    </div>
+    <p class="budget-amount">~108€</p>
+  </div>
+
+  <p style="font-size:12px; color:var(--text-muted); text-align:center; padding: 8px 0 20px; font-style:italic;">Dans l'enveloppe 120€ ± 20€ ✅</p>
+</div>
+
+<script>
+  const TOTAL = 37;
+
+  // Tab switching
+  function showTab(id, btn) {
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Recipe accordion
+  function toggleRecipe(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+
+  // Batch accordion
+  function toggleBatch(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Checklist
+  function updateCounter() {
+    const checked = document.querySelectorAll('.course-item input:checked').length;
+    document.getElementById('counter').textContent = checked + '/' + TOTAL + ' achetés';
+  }
+
+  function toggleItem(id) {
+    const item = document.getElementById(id);
+    const cb = item.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    if (cb.checked) {
+      item.classList.add('checked');
+      try { localStorage.setItem('menu1_' + id, '1'); } catch(e) {}
+    } else {
+      item.classList.remove('checked');
+      try { localStorage.removeItem('menu1_' + id); } catch(e) {}
+    }
+    updateCounter();
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.course-item').forEach(item => {
+      const cb = item.querySelector('input[type="checkbox"]');
+      cb.checked = false;
+      item.classList.remove('checked');
+      try { localStorage.removeItem('menu1_' + item.id); } catch(e) {}
+    });
+    updateCounter();
+  }
+
+  // Load saved state
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.course-item').forEach(item => {
+      try {
+        if (localStorage.getItem('menu1_' + item.id) === '1') {
+          const cb = item.querySelector('input[type="checkbox"]');
+          cb.checked = true;
+          item.classList.add('checked');
+        }
+      } catch(e) {}
+    });
+    updateCounter();
+  });
+</script>
+
+</body>
+</html>
