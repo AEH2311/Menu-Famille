@@ -1,1571 +1,1012 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Menu Semaine 1 — Famille</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Menu Famille</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivoire: #faf8f4;
+  --ivoire-2: #f2ede4;
+  --ivoire-3: #e8e0d0;
+  --sauge: #5c7a5f;
+  --sauge-2: #7a9e7e;
+  --sauge-pale: #e8f0e8;
+  --sauge-xpale: #f2f6f2;
+  --terra: #b5603a;
+  --terra-pale: #f7ede7;
+  --ardoise: #3d4a3e;
+  --gris: #8a8a7a;
+  --gris-2: #c8c4b8;
+  --texte: #2a2a24;
+  --texte-2: #5a5a50;
+  --or: #c4a55a;
+  --or-pale: #faf3e0;
+  --bleu: #4a7a8a;
+  --bleu-pale: #e8f2f5;
+  --rose: #c0506a;
+  --rose-pale: #fde8f0;
+  --r: 16px; --rsm: 10px;
+  --ombre: 0 2px 16px rgba(60,50,30,.07);
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--ivoire); color: var(--texte); padding-bottom: 90px; }
 
-    :root {
-      --bg: #F7F4EF;
-      --card: #FFFFFF;
-      --green-deep: #2D5016;
-      --green-mid: #4A7C2F;
-      --green-light: #8DB87A;
-      --green-pale: #E8F0E1;
-      --amber: #C8841A;
-      --amber-pale: #FDF3E3;
-      --red-soft: #C0392B;
-      --text: #1A1A1A;
-      --text-muted: #6B6B6B;
-      --border: #E0DAD0;
-      --tag-express: #2D5016;
-      --tag-4ans: #C8841A;
-      --tag-batch: #4A7C2F;
-      --tag-transv: #5B8FA8;
-      --tag-antifr: #7B4FAB;
-      --shadow: 0 2px 12px rgba(0,0,0,0.08);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
-      --radius: 16px;
-      --radius-sm: 10px;
-    }
+/* HEADER */
+.hdr { background: var(--ardoise); padding: 24px 16px 18px; }
+.hdr-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--sauge-2); margin-bottom: 5px; }
+.hdr-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--ivoire); margin-bottom: 14px; }
+.hdr-title span { color: var(--sauge-2); }
+.week-row { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.week-row::-webkit-scrollbar { display: none; }
+.wbtn { flex-shrink: 0; padding: 7px 14px; border-radius: 30px; border: 1.5px solid rgba(255,255,255,.15); background: transparent; color: rgba(255,255,255,.5); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; min-height: 36px; white-space: nowrap; transition: all .2s; }
+.wbtn.on { background: var(--sauge); border-color: var(--sauge); color: #fff; font-weight: 600; }
+.wbtn small { display: block; font-size: 10px; opacity: .75; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+/* NAV */
+.nav { display: flex; background: #fff; border-bottom: 1px solid var(--ivoire-3); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(60,50,30,.06); }
+.nbtn { flex: 1; min-height: 50px; border: none; background: none; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; color: var(--gris); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; letter-spacing: .3px; }
+.nbtn .ni { font-size: 16px; }
+.nbtn.on { color: var(--sauge); font-weight: 600; border-bottom: 2px solid var(--sauge); }
 
-    body {
-      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+/* CONTENT */
+#content { padding: 16px; }
 
-    /* HEADER */
-    .header {
-      background: var(--green-deep);
-      color: white;
-      padding: 20px 20px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
-    }
-    .header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-    .header p {
-      font-size: 12px;
-      opacity: 0.7;
-      margin-top: 2px;
-      font-weight: 300;
-    }
+/* CARDS génériques */
+.card { background: #fff; border-radius: var(--r); box-shadow: var(--ombre); margin-bottom: 10px; overflow: hidden; }
 
-    /* NAV TABS */
-    .nav {
-      display: flex;
-      background: var(--green-deep);
-      padding: 0 12px 12px;
-      gap: 6px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .nav::-webkit-scrollbar { display: none; }
-    .nav-btn {
-      flex-shrink: 0;
-      min-height: 44px;
-      min-width: 72px;
-      padding: 8px 14px;
-      border: none;
-      background: rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.75);
-      border-radius: 10px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-    .nav-btn.active {
-      background: white;
-      color: var(--green-deep);
-      font-weight: 600;
-    }
+/* Menu card */
+.mcard { display: flex; align-items: flex-start; padding: 13px 14px; gap: 12px; }
+.mcard-day { flex-shrink: 0; width: 54px; text-align: center; }
+.mcard-emoji { font-size: 20px; display: block; margin-bottom: 2px; }
+.mcard-dayname { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .8px; text-transform: uppercase; }
+.mcard-body { flex: 1; }
+.mcard-plat { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 7px; }
+.mcard-plat em { font-style: italic; color: var(--gris); font-size: 13px; }
+.mcard-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gris); flex-shrink: 0; padding-top: 3px; }
 
-    /* CONTENT */
-    .content { display: none; padding: 16px; max-width: 700px; margin: 0 auto; }
-    .content.active { display: block; }
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { border-radius: 20px; padding: 2px 8px; font-size: 10px; font-weight: 600; }
+.t-af { background: var(--sauge-xpale); color: var(--sauge); }
+.t-ex { background: var(--terra-pale); color: var(--terra); }
+.t-4a { background: var(--bleu-pale); color: var(--bleu); }
+.t-bt { background: var(--or-pale); color: var(--or); }
+.t-tr { background: var(--ivoire-2); color: var(--texte-2); }
+.t-cf { background: var(--rose-pale); color: var(--rose); }
 
-    /* SECTION TITLE */
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: var(--green-deep);
-      margin-bottom: 16px;
-      font-weight: 700;
-    }
+/* Day border colors */
+.dc-lundi { border-left: 3px solid var(--sauge); }
+.dc-mardi { border-left: 3px solid var(--bleu); }
+.dc-mercredi { border-left: 3px solid var(--or); }
+.dc-jeudi { border-left: 3px solid var(--terra); }
+.dc-vendredi { border-left: 3px solid var(--bleu); }
+.dc-samedi { border-left: 3px solid var(--rose); }
+.dc-dimanche { border-left: 3px solid var(--sauge-2); }
+.dc-lundi .mcard-dayname { color: var(--sauge); }
+.dc-mardi .mcard-dayname, .dc-vendredi .mcard-dayname { color: var(--bleu); }
+.dc-mercredi .mcard-dayname { color: var(--or); }
+.dc-jeudi .mcard-dayname { color: var(--terra); }
+.dc-samedi .mcard-dayname { color: var(--rose); }
+.dc-dimanche .mcard-dayname { color: var(--sauge-2); }
 
-    /* CARDS */
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
+/* Proteins bar */
+.pbar { background: #fff; border-radius: var(--rsm); padding: 11px 13px; margin-bottom: 12px; font-size: 13px; color: var(--texte-2); line-height: 1.6; border: 1px solid var(--ivoire-3); }
+.pbar strong { color: var(--ardoise); }
 
-    /* MENU TABLE */
-    .menu-day {
-      background: var(--card);
-      border-radius: var(--radius);
-      margin-bottom: 10px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .menu-day-header {
-      display: flex;
-      align-items: center;
-      padding: 12px 16px;
-      gap: 12px;
-      background: var(--green-pale);
-    }
-    .day-name {
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--green-deep);
-      min-width: 80px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .day-emoji { font-size: 20px; }
-    .day-time {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-left: auto;
-      background: white;
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-    .menu-day-body {
-      padding: 12px 16px;
-    }
-    .menu-dish {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .tags-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
-    .tag {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 20px;
-      color: white;
-    }
-    .tag.express { background: var(--tag-express); }
-    .tag.enfant { background: var(--tag-4ans); }
-    .tag.batch { background: var(--tag-batch); }
-    .tag.transv { background: var(--tag-transv); }
-    .tag.antifr { background: var(--tag-antifr); }
+/* Recettes accordeon */
+.rcard { background: #fff; border-radius: var(--r); box-shadow: var(--ombre); margin-bottom: 10px; overflow: hidden; }
+.rhead { padding: 15px 15px 12px; cursor: pointer; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; -webkit-user-select: none; user-select: none; }
+.rhead-left { flex: 1; }
+.rjour { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--sauge); margin-bottom: 3px; }
+.rtitre { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--ardoise); line-height: 1.25; margin-bottom: 7px; }
+.rchev { color: var(--sauge-2); font-size: 14px; transition: transform .25s; flex-shrink: 0; margin-top: 4px; }
+.rchev.open { transform: rotate(180deg); }
+.rbody { display: none; padding: 0 15px 15px; border-top: 1px solid var(--ivoire-2); }
+.rbody.open { display: block; }
+.rsec { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--sauge); margin: 14px 0 7px; }
+.ings { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.ings li { font-size: 13px; padding: 7px 11px; background: var(--ivoire); border-radius: var(--rsm); line-height: 1.4; }
+.ings li::before { content: "—"; color: var(--sauge-2); margin-right: 7px; font-size: 11px; }
+.ing-store { font-size: 11px; color: var(--sauge); display: block; margin-top: 1px; }
+.ing-yuka { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gris); float: right; }
+.steps { list-style: none; counter-reset: s; display: flex; flex-direction: column; gap: 5px; }
+.steps li { font-size: 13px; line-height: 1.5; padding: 9px 11px 9px 38px; background: var(--ivoire-2); border-radius: var(--rsm); position: relative; counter-increment: s; }
+.steps li::before { content: counter(s); position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 19px; height: 19px; background: var(--sauge); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; }
+.box { border-radius: var(--rsm); padding: 10px 12px; margin-top: 7px; font-size: 13px; line-height: 1.5; }
+.blbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 4px; }
+.b4a { background: var(--bleu-pale); } .b4a .blbl { color: var(--bleu); }
+.bsnt { background: var(--sauge-xpale); } .bsnt .blbl { color: var(--sauge); }
+.btrv { background: var(--or-pale); } .btrv .blbl { color: var(--or); }
+.bsyn { background: var(--ivoire-2); } .bsyn .blbl { color: var(--texte-2); }
+.bexp { background: var(--terra-pale); } .bexp .blbl { color: var(--terra); }
+.bbat { border-radius: var(--rsm); padding: 10px 12px; margin-top: 7px; font-size: 13px; line-height: 1.5; }
+.bbat-a { background: var(--or-pale); border: 1.5px solid var(--or); } .bbat-a .blbl { color: var(--or); }
+.bbat-b { background: var(--terra-pale); border: 1.5px solid rgba(181,96,58,.3); } .bbat-b .blbl { color: var(--terra); }
 
-    /* BATCH SECTION */
-    .batch-option {
-      background: var(--card);
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      box-shadow: var(--shadow);
-      border: 2px solid var(--green-pale);
-      overflow: hidden;
-    }
-    .batch-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      background: var(--green-pale);
-      cursor: pointer;
-    }
-    .batch-letter {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      font-weight: 800;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      flex-shrink: 0;
-    }
-    .batch-letter.a { background: var(--green-deep); }
-    .batch-letter.b { background: var(--amber); }
-    .batch-title { font-weight: 700; font-size: 15px; }
-    .batch-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .batch-body { padding: 14px 16px; }
-    .batch-body p { font-size: 14px; line-height: 1.6; color: var(--text); margin-bottom: 8px; }
-    .batch-arrow {
-      margin-left: auto;
-      transition: transform 0.3s;
-      font-size: 16px;
-      color: var(--text-muted);
-    }
-    .batch-body { display: none; }
-    .batch-option.open .batch-body { display: block; }
-    .batch-option.open .batch-arrow { transform: rotate(180deg); }
+/* Plan B */
+.planb-intro { background: var(--terra-pale); border-radius: var(--rsm); padding: 11px 13px; font-size: 13px; color: var(--terra); line-height: 1.55; margin-bottom: 14px; border-left: 3px solid var(--terra); }
+.pcard { background: #fff; border-radius: var(--r); box-shadow: var(--ombre); padding: 16px; margin-bottom: 10px; }
+.pnum { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--sauge); color: #fff; border-radius: 50%; font-weight: 700; font-size: 13px; font-family: 'DM Mono', monospace; margin-bottom: 8px; }
+.ptitle { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--ardoise); margin-bottom: 5px; line-height: 1.3; }
+.pbadge { display: inline-block; background: var(--sauge-xpale); color: var(--sauge); border-radius: 20px; padding: 2px 9px; font-size: 11px; font-weight: 600; font-family: 'DM Mono', monospace; margin-bottom: 10px; }
+.psteps { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.psteps li { font-size: 13px; padding: 7px 10px; background: var(--ivoire); border-radius: var(--rsm); line-height: 1.4; }
+.pings { margin-top: 9px; font-size: 11px; color: var(--gris); font-style: italic; font-family: 'DM Mono', monospace; line-height: 1.5; }
+.batch-box { background: #fff; border-radius: var(--r); box-shadow: var(--ombre); padding: 16px; margin-bottom: 10px; }
+.batch-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; color: var(--ardoise); margin-bottom: 10px; }
 
-    /* RECIPE ACCORDION */
-    .recipe-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-    .recipe-header {
-      padding: 14px 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .recipe-emoji { font-size: 24px; flex-shrink: 0; margin-top: 1px; }
-    .recipe-meta { flex: 1; }
-    .recipe-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--green-deep);
-      line-height: 1.3;
-    }
-    .recipe-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 3px; }
-    .recipe-chevron {
-      font-size: 18px;
-      color: var(--text-muted);
-      transition: transform 0.3s;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-    .recipe-card.open .recipe-chevron { transform: rotate(180deg); }
-    .recipe-body { display: none; padding: 0 16px 16px; }
-    .recipe-card.open .recipe-body { display: block; }
+/* Snacks */
+.scard { background: #fff; border-radius: var(--r); box-shadow: var(--ombre); padding: 16px; margin-bottom: 10px; }
+.shdr { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.semoji { font-size: 28px; }
+.stitle { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; color: var(--ardoise); line-height: 1.3; }
+.swhen { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gris); margin-bottom: 7px; }
+.show { font-size: 13px; line-height: 1.55; color: var(--texte-2); }
 
-    .why-box {
-      background: var(--green-pale);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      margin-bottom: 14px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--green-deep);
-      border-left: 3px solid var(--green-mid);
-    }
+/* Courses */
+.budget { background: var(--ardoise); color: var(--ivoire); border-radius: var(--r); padding: 14px 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+.blabel { font-size: 11px; opacity: .7; font-family: 'DM Mono', monospace; }
+.bamt { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--sauge-2); }
+.bsub { font-size: 10px; opacity: .6; margin-top: 1px; }
+.ctop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.cpteur { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--sauge); }
+.creset { background: var(--ivoire-2); color: var(--texte-2); border: none; border-radius: 20px; padding: 7px 14px; font-size: 12px; font-weight: 600; cursor: pointer; min-height: 34px; }
+.ccat { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--sauge); margin: 16px 0 7px 2px; }
+.citem { display: flex; align-items: flex-start; gap: 10px; padding: 10px 13px; background: #fff; border-radius: var(--rsm); margin-bottom: 5px; box-shadow: 0 1px 4px rgba(60,50,30,.04); cursor: pointer; }
+.citem.delhaize { border-left: 2px solid var(--terra); }
+.citem input[type=checkbox] { width: 20px; height: 20px; min-width: 20px; accent-color: var(--sauge); cursor: pointer; margin-top: 2px; }
+.citem label { flex: 1; font-size: 13px; line-height: 1.4; cursor: pointer; }
+.citem label.done { text-decoration: line-through; opacity: .4; }
+.chint { display: block; font-family: 'DM Mono', monospace; font-size: 11px; margin-top: 2px; }
+.chint-g { color: var(--sauge); }
+.chint-o { color: var(--terra); }
+.chint-y { color: var(--or); }
+.cstore { font-size: 11px; color: var(--gris); display: block; margin-top: 1px; }
 
-    .recipe-section-label {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      margin: 14px 0 8px;
-    }
-
-    .ingredient-list { list-style: none; }
-    .ingredient-list li {
-      font-size: 14px;
-      padding: 7px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.4;
-    }
-    .ingredient-list li:last-child { border-bottom: none; }
-    .ing-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green-light);
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-    .ing-recycle { color: var(--tag-transv); font-size: 12px; }
-    .ing-brand { color: var(--text-muted); font-size: 12px; display: block; }
-
-    .steps-list { list-style: none; counter-reset: steps; }
-    .steps-list li {
-      font-size: 14px;
-      line-height: 1.6;
-      padding: 8px 0 8px 36px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      counter-increment: steps;
-    }
-    .steps-list li:last-child { border-bottom: none; }
-    .steps-list li::before {
-      content: counter(steps);
-      position: absolute;
-      left: 0;
-      top: 8px;
-      width: 24px;
-      height: 24px;
-      background: var(--green-deep);
-      color: white;
-      border-radius: 50%;
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .astuce-box {
-      background: var(--amber-pale);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      margin-top: 12px;
-      font-size: 13px;
-      border-left: 3px solid var(--amber);
-      color: #5A3A0A;
-    }
-    .astuce-box strong { color: var(--amber); }
-
-    .friction-box {
-      background: #F0E8FF;
-      border-radius: var(--radius-sm);
-      padding: 8px 12px;
-      margin-top: 10px;
-      font-size: 12px;
-      color: #4A2080;
-      border-left: 3px solid var(--tag-antifr);
-    }
-
-    .synergy-box {
-      background: #E8F4FD;
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      margin-top: 10px;
-      font-size: 13px;
-      color: #1A3A5C;
-      border-left: 3px solid var(--tag-transv);
-    }
-
-    /* PLAN B */
-    .planb-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    .planb-header {
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .planb-badge {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 800;
-      color: white;
-      flex-shrink: 0;
-    }
-    .planb-badge.b1 { background: var(--green-deep); }
-    .planb-badge.b2 { background: var(--tag-transv); }
-    .planb-title { font-weight: 700; font-size: 16px; }
-    .planb-sub { font-size: 13px; color: var(--text-muted); }
-    .planb-body { padding: 0 16px 16px; }
-    .planb-body ol { list-style: none; counter-reset: pbsteps; padding: 0; }
-    .planb-body ol li {
-      counter-increment: pbsteps;
-      padding: 6px 0 6px 28px;
-      font-size: 14px;
-      position: relative;
-      border-bottom: 1px solid var(--border);
-    }
-    .planb-body ol li:last-child { border-bottom: none; }
-    .planb-body ol li::before {
-      content: counter(pbsteps);
-      position: absolute;
-      left: 0;
-      top: 7px;
-      width: 20px;
-      height: 20px;
-      background: var(--green-light);
-      color: white;
-      border-radius: 50%;
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .planb-ings {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-    .planb-ing {
-      font-size: 12px;
-      background: var(--green-pale);
-      color: var(--green-deep);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-
-    /* SNACKS */
-    .snack-card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-    .snack-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--amber);
-      margin-bottom: 8px;
-    }
-    .snack-timing {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
-    .snack-card p { font-size: 14px; line-height: 1.6; }
-
-    /* COURSES / CHECKLIST */
-    .courses-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .counter-badge {
-      background: var(--green-deep);
-      color: white;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-    }
-    .reset-btn {
-      background: none;
-      border: 2px solid var(--red-soft);
-      color: var(--red-soft);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      min-height: 44px;
-    }
-    .cat-header {
-      background: var(--green-deep);
-      color: white;
-      padding: 8px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin: 14px 0 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .course-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 13px 14px;
-      background: var(--card);
-      border-radius: var(--radius-sm);
-      margin-bottom: 4px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .course-item input[type="checkbox"] {
-      width: 22px;
-      height: 22px;
-      accent-color: var(--green-mid);
-      flex-shrink: 0;
-      cursor: pointer;
-      margin-top: 1px;
-    }
-    .course-label { flex: 1; cursor: pointer; }
-    .course-name { font-size: 15px; font-weight: 500; line-height: 1.3; }
-    .course-usage {
-      display: block;
-      font-size: 12px;
-      color: var(--tag-transv);
-      font-style: italic;
-      margin-top: 2px;
-    }
-    .course-delhaize {
-      display: inline-block;
-      font-size: 11px;
-      background: #FDE8E8;
-      color: var(--red-soft);
-      padding: 2px 7px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-top: 3px;
-    }
-    .course-planb {
-      display: inline-block;
-      font-size: 11px;
-      background: #E8F0E1;
-      color: var(--green-deep);
-      padding: 2px 7px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-top: 3px;
-      margin-left: 3px;
-    }
-    .course-item.checked { opacity: 0.45; }
-    .course-item.checked .course-name { text-decoration: line-through; }
-
-    .budget-card {
-      background: var(--green-deep);
-      color: white;
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      margin-top: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .budget-label { font-size: 14px; opacity: 0.8; }
-    .budget-amount { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; }
-
-    /* DISCLAIMER */
-    .info-banner {
-      background: var(--amber-pale);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #5A3A0A;
-      margin-bottom: 16px;
-      border-left: 3px solid var(--amber);
-    }
-
-    /* SCROLLBAR */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 3px; }
-
-    /* ANIMATIONS */
-    .content.active {
-      animation: fadeUp 0.3s ease;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .divider { height: 1px; background: var(--border); margin: 12px 0; }
-  </style>
+/* Section label */
+.slbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gris); margin: 18px 0 10px; }
+</style>
 </head>
 <body>
 
-<div class="header">
-  <h1>🌿 Menu Semaine 1</h1>
-  <p>4 personnes · Budget ~108€ · Belgique</p>
+<div class="hdr">
+  <div class="hdr-label">Menu · Famille · Belgique</div>
+  <div class="hdr-title">4 semaines<br><span>de repas</span></div>
+  <div class="week-row">
+    <button class="wbtn" onclick="switchWeek(0,this)">S1<small>Pizza 🍕</small></button>
+    <button class="wbtn" onclick="switchWeek(1,this)">S2<small>Burger 🍔</small></button>
+    <button class="wbtn" onclick="switchWeek(2,this)">S3<small>Croque 🧀</small></button>
+    <button class="wbtn" onclick="switchWeek(3,this)">S4<small>Pancakes 🥞</small></button>
+  </div>
 </div>
 
 <nav class="nav">
-  <button class="nav-btn active" onclick="showTab('menu', this)">📅 Menu</button>
-  <button class="nav-btn" onclick="showTab('recettes', this)">👨‍🍳 Recettes</button>
-  <button class="nav-btn" onclick="showTab('batch', this)">🔄 Batch</button>
-  <button class="nav-btn" onclick="showTab('planb', this)">🆘 Plan B</button>
-  <button class="nav-btn" onclick="showTab('snacks', this)">🍎 Snacks</button>
-  <button class="nav-btn" onclick="showTab('courses', this)">🛒 Courses</button>
+  <button class="nbtn" onclick="switchTab('menu',this)"><span class="ni">📅</span>Menu</button>
+  <button class="nbtn" onclick="switchTab('recettes',this)"><span class="ni">📖</span>Recettes</button>
+  <button class="nbtn" onclick="switchTab('planb',this)"><span class="ni">🆘</span>Plan B</button>
+  <button class="nbtn" onclick="switchTab('snacks',this)"><span class="ni">🍎</span>Snacks</button>
+  <button class="nbtn" onclick="switchTab('courses',this)"><span class="ni">🛒</span>Courses</button>
 </nav>
 
-<!-- ═══════════════ MENU ═══════════════ -->
-<div id="tab-menu" class="content active">
-  <p class="section-title">Semaine 1</p>
-
-  <div class="menu-day">
-    <div class="menu-day-header">
-      <span class="day-emoji">🍗</span>
-      <span class="day-name">Lundi</span>
-      <span class="day-time">⏱ 20 min</span>
-    </div>
-    <div class="menu-day-body">
-      <p class="menu-dish">Poulet tikka masala léger + riz basmati + raita concombre</p>
-      <div class="tags-row">
-        <span class="tag antifr">Anti-friction ✓</span>
-        <span class="tag express">Express 20min</span>
-        <span class="tag enfant">4 ans OK</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-day">
-    <div class="menu-day-header">
-      <span class="day-emoji">🐟</span>
-      <span class="day-name">Mardi</span>
-      <span class="day-time">⏱ 25 min</span>
-    </div>
-    <div class="menu-day-body">
-      <p class="menu-dish">Filets de saumon vapeur + quinoa citron-persil + tomates cerises</p>
-      <div class="tags-row">
-        <span class="tag antifr">Anti-friction ✓</span>
-        <span class="tag enfant">4 ans OK</span>
-        <span class="tag transv">Transversal ♻️</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-day">
-    <div class="menu-day-header">
-      <span class="day-emoji">🌮</span>
-      <span class="day-name">Mercredi</span>
-      <span class="day-time">⏱ 15 min</span>
-    </div>
-    <div class="menu-day-body">
-      <p class="menu-dish">Tacos effiloché poulet + salade chou rouge <em>— ou Plan B</em></p>
-      <div class="tags-row">
-        <span class="tag antifr">Anti-friction ✓</span>
-        <span class="tag batch">Batch ♻️</span>
-        <span class="tag enfant">4 ans OK</span>
-        <span class="tag express">Express 15min</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-day">
-    <div class="menu-day-header">
-      <span class="day-emoji">🫘</span>
-      <span class="day-name">Jeudi</span>
-      <span class="day-time">⏱ 25 min</span>
-    </div>
-    <div class="menu-day-body">
-      <p class="menu-dish">Croquettes pois chiches four + carottes rôties + tzatziki</p>
-      <div class="tags-row">
-        <span class="tag antifr">Anti-friction ✓</span>
-        <span class="tag enfant">4 ans OK</span>
-        <span class="tag transv">Transversal ♻️</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-day">
-    <div class="menu-day-header">
-      <span class="day-emoji">🐟</span>
-      <span class="day-name">Vendredi</span>
-      <span class="day-time">⏱ 35 min</span>
-    </div>
-    <div class="menu-day-body">
-      <p class="menu-dish">Truite papillote fenouil-citron + boulgour herbes + épinards</p>
-      <div class="tags-row">
-        <span class="tag transv">Transversal ♻️</span>
-        <span class="tag enfant">4 ans OK</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-day">
-    <div class="menu-day-header">
-      <span class="day-emoji">🎉</span>
-      <span class="day-name">Samedi</span>
-      <span class="day-time">Flexible</span>
-    </div>
-    <div class="menu-day-body">
-      <p class="menu-dish">Libre — restes / sortie / invités</p>
-      <div class="tags-row">
-        <span class="tag express">Liberté</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-day">
-    <div class="menu-day-header">
-      <span class="day-emoji">🍗</span>
-      <span class="day-name">Dimanche</span>
-      <span class="day-time">⏱ 50 min</span>
-    </div>
-    <div class="menu-day-body">
-      <p class="menu-dish">Poulet rôti + butternut rôtie <em>(Option A batch)</em><br>
-      <em style="font-size:13px;color:var(--text-muted)">ou Curry lentilles corail (Option B)</em></p>
-      <div class="tags-row">
-        <span class="tag batch">Batch ♻️</span>
-        <span class="tag enfant">4 ans OK</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="info-banner">
-    💡 <strong>Protéines semaine :</strong> Poulet (×2) · Saumon MSC · Truite MSC · Pois chiches (légumineuse) · Œufs. Viande rouge : 0 (disponible si envie semaine suivante).
-  </div>
-</div>
-
-<!-- ═══════════════ RECETTES ═══════════════ -->
-<div id="tab-recettes" class="content">
-  <p class="section-title">7 Recettes</p>
-
-  <!-- LUNDI -->
-  <div class="recipe-card" id="rec-lundi">
-    <div class="recipe-header" onclick="toggleRecipe('rec-lundi')">
-      <span class="recipe-emoji">🍗</span>
-      <div class="recipe-meta">
-        <p class="recipe-name">Poulet tikka masala léger</p>
-        <p class="recipe-subtitle">Lundi · 20 min · Anti-friction ✓</p>
-        <div class="tags-row" style="margin-top:6px">
-          <span class="tag antifr">Anti-friction ✓</span>
-          <span class="tag express">20min</span>
-          <span class="tag enfant">4 ans OK</span>
-        </div>
-      </div>
-      <span class="recipe-chevron">▼</span>
-    </div>
-    <div class="recipe-body">
-      <div class="why-box">
-        🌿 <strong>Pourquoi :</strong> Le curcuma est anti-inflammatoire — son absorption est multipliée ×20 avec du poivre noir. Le yaourt nature attendrit les protéines et apporte des probiotiques. Une porte d'entrée douce vers les épices pour les enfants.
-      </div>
-      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
-      <ul class="ingredient-list">
-        <li><span class="ing-dot"></span><div>600g filets poulet plein air<span class="ing-brand">Intermarché boucherie · Yuka ~85</span></div></li>
-        <li><span class="ing-dot"></span><div>200g yaourt nature entier ♻️ <span class="ing-recycle">→ aussi jeudi tzatziki + Plan B</span><span class="ing-brand">Pâturages Intermarché · Yuka 90</span></div></li>
-        <li><span class="ing-dot"></span><div>2 c.s. concentré tomates<span class="ing-brand">Mutti/Elvir · ingrédients : tomates+sel</span></div></li>
-        <li><span class="ing-dot"></span><div>Épices : 1 c.c. curcuma, 1 c.c. cumin, ½ c.c. paprika, ½ c.c. coriandre</div></li>
-        <li><span class="ing-dot"></span><div>1 oignon + 2 gousses ail</div></li>
-        <li><span class="ing-dot"></span><div>1 c.s. ghee ou huile avocat</div></li>
-        <li><span class="ing-dot"></span><div>300g riz basmati ♻️ <span class="ing-recycle">→ aussi mercredi enfant 4 ans</span><span class="ing-brand">Intermarché marque propre · Yuka 80</span></div></li>
-        <li><span class="ing-dot"></span><div>1 concombre ♻️ <span class="ing-recycle">→ aussi jeudi tzatziki + Plan B N°2</span></div></li>
-        <li><span class="ing-dot"></span><div>Persil frais ♻️ <span class="ing-recycle">→ aussi mardi + vendredi + Plan B N°1</span></div></li>
-        <li><span class="ing-dot"></span><div>½ citron ♻️ <span class="ing-recycle">→ utilisé toute la semaine</span></div></li>
-      </ul>
-      <p class="recipe-section-label">Étapes</p>
-      <ol class="steps-list">
-        <li>Couper le poulet en cubes (~3cm). Dans un bol : yaourt + concentré tomate + toutes les épices. Mélanger et enrober le poulet.</li>
-        <li>Faire revenir l'oignon émincé dans le ghee (poêle, feu moyen, 3 min). Ajouter l'ail haché, 1 min supplémentaire.</li>
-        <li>Ajouter le poulet mariné dans la poêle. Couvrir et cuire 12 min à feu moyen. Remuer à mi-cuisson.</li>
-        <li>Pendant ce temps : riz casserole (1 volume riz / 1,5 eau / couvercle / 12 min).</li>
-        <li>Raita express : râper le concombre, essorer légèrement, mélanger yaourt + concombre + jus citron + sel. 2 min.</li>
-      </ol>
-      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 2 cuissons actives (poêle + casserole) · 2 ustensiles · 1 découpe complexe (oignon)</div>
-      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Séparer 1-2 morceaux de poulet AVANT la marinade épicée. Cuire nature à la poêle 5 min. Servir avec riz blanc + bâtonnets concombre cru.</div>
-      <div class="synergy-box">💊 <strong>Synergie :</strong> Curcuma + poivre noir = biodisponibilité ×20. Riz basmati (index glycémique bas) + protéines poulet = énergie stable pour les enfants.</div>
-    </div>
-  </div>
-
-  <!-- MARDI -->
-  <div class="recipe-card" id="rec-mardi">
-    <div class="recipe-header" onclick="toggleRecipe('rec-mardi')">
-      <span class="recipe-emoji">🐟</span>
-      <div class="recipe-meta">
-        <p class="recipe-name">Saumon vapeur + quinoa citron-persil</p>
-        <p class="recipe-subtitle">Mardi · 25 min · Poisson gras · Anti-friction ✓</p>
-        <div class="tags-row" style="margin-top:6px">
-          <span class="tag antifr">Anti-friction ✓</span>
-          <span class="tag transv">Transversal ♻️</span>
-          <span class="tag enfant">4 ans OK</span>
-        </div>
-      </div>
-      <span class="recipe-chevron">▼</span>
-    </div>
-    <div class="recipe-body">
-      <div class="why-box">
-        🌿 <strong>Pourquoi :</strong> Le saumon MSC apporte les oméga-3 DHA/EPA essentiels au développement cérébral des enfants. La vapeur douce préserve ces acides gras fragiles (vs friture). Quinoa = protéine végétale complète avec tous les acides aminés essentiels.
-      </div>
-      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
-      <ul class="ingredient-list">
-        <li><span class="ing-dot"></span><div>4 filets saumon MSC ~150g<span class="ing-brand">Intermarché poissonnerie ou surgelés MSC · Yuka 88</span></div></li>
-        <li><span class="ing-dot"></span><div>200g quinoa blanc ♻️<span class="ing-brand">Priméal ou Intermarché bio · Yuka 92</span></div></li>
-        <li><span class="ing-dot"></span><div>1 bouquet persil frais ♻️ <span class="ing-recycle">→ aussi lundi raita + vendredi boulgour + Plan B N°1</span></div></li>
-        <li><span class="ing-dot"></span><div>2 citrons ♻️ <span class="ing-recycle">→ utilisés toute la semaine (6 au total)</span></div></li>
-        <li><span class="ing-dot"></span><div>250g tomates cerises bio ♻️ <span class="ing-recycle">→ aussi mercredi + Plan B N°2</span><span class="ing-brand">Intermarché bio · Yuka 95</span></div></li>
-        <li><span class="ing-dot"></span><div>1 c.s. huile d'olive · sel · poivre</div></li>
-      </ul>
-      <p class="recipe-section-label">Étapes</p>
-      <ol class="steps-list">
-        <li>Rincer le quinoa à l'eau froide. Dans une casserole : 1 volume quinoa + 1,5 eau froide. Porter à ébullition, puis feu doux couvercle, 15 min.</li>
-        <li>Poser les filets de saumon dans un panier vapeur (ou passoire sur casserole d'eau frémissante). Cuire 10-12 min selon épaisseur.</li>
-        <li>Pendant ce temps : tomates cerises dans un bol, filet huile d'olive, pincée sel. Pas de cuisson — fraîcheur conservée.</li>
-        <li>Quinoa cuit : égrener à la fourchette, mélanger persil haché + zeste d'1 citron + jus ½ citron + huile d'olive. Assaisonner.</li>
-        <li>Dresser : quinoa → saumon posé dessus → tomates cerises à côté.</li>
-      </ol>
-      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 1 cuisson active (vapeur + casserole empilées = 1 source) + cru tomates · 1 ustensile principal</div>
-      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Saumon sans assaisonnement (prendre avant finition). Si quinoa refusé → remplacer par riz blanc cuit en même temps. Tomates cerises entières = doigts.</div>
-      <div class="synergy-box">💊 <strong>Synergie :</strong> Oméga-3 saumon + vitamine C tomates = absorption maximale. Quinoa (protéine complète) + légumes crus = microbiote diversifié.</div>
-    </div>
-  </div>
-
-  <!-- MERCREDI -->
-  <div class="recipe-card" id="rec-mercredi">
-    <div class="recipe-header" onclick="toggleRecipe('rec-mercredi')">
-      <span class="recipe-emoji">🌮</span>
-      <div class="recipe-meta">
-        <p class="recipe-name">Tacos poulet effiloché + chou rouge</p>
-        <p class="recipe-subtitle">Mercredi · 15 min · Batch dimanche · Anti-friction ✓</p>
-        <div class="tags-row" style="margin-top:6px">
-          <span class="tag antifr">Anti-friction ✓</span>
-          <span class="tag batch">Batch ♻️</span>
-          <span class="tag express">15min</span>
-          <span class="tag enfant">4 ans OK</span>
-        </div>
-      </div>
-      <span class="recipe-chevron">▼</span>
-    </div>
-    <div class="recipe-body">
-      <div class="why-box">
-        🌿 <strong>Pourquoi :</strong> Transformation intelligente du batch. Le chou rouge cru est une bombe d'anthocyanes et de vitamine C. Assemblage festif que les enfants adorent composer eux-mêmes — meilleure acceptation des nouveaux aliments.
-      </div>
-      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
-      <ul class="ingredient-list">
-        <li><span class="ing-dot"></span><div>~350g poulet effiloché ♻️ <span class="ing-recycle">→ reste batch dimanche (décongelé mardi soir)</span></div></li>
-        <li><span class="ing-dot"></span><div>¼ chou rouge ♻️ <span class="ing-recycle">→ acheté pour cette semaine, reste = jeudi bâtonnets snack</span></div></li>
-        <li><span class="ing-dot"></span><div>6-8 tortillas blé ou pains pita<span class="ing-brand">Intermarché — vérifier : farine+eau+sel+levure uniquement</span></div></li>
-        <li><span class="ing-dot"></span><div>150g yaourt nature ♻️ + ½ citron ♻️ + pincée cumin = sauce express</div></li>
-        <li><span class="ing-dot"></span><div>Reste tomates cerises bio ♻️ <span class="ing-recycle">→ reste mardi</span></div></li>
-      </ul>
-      <p class="recipe-section-label">Étapes</p>
-      <ol class="steps-list">
-        <li>Le poulet a été décongelé mardi soir. Le réchauffer dans une poêle avec 1 c.s. d'eau, 5 min.</li>
-        <li>Émincer finement ¼ chou rouge (2 min). Conserver le reste en réfrigérateur pour bâtonnets snack.</li>
-        <li>Sauce express : yaourt + jus citron + pincée cumin + sel. Mélanger 30 secondes.</li>
-        <li>Assembler à table : chacun garnit son taco. Ambiance!</li>
-      </ol>
-      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 1 cuisson active (réchauffage poêle) + assemblage cru · 1 ustensile</div>
-      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Pain pita ouvert + poulet nature + tomates cerises + bâtonnets concombre à côté. Laisser assembler seul = autonomie et plaisir.</div>
-      <div class="synergy-box">💊 <strong>Synergie :</strong> Anthocyanes chou rouge = antioxydants puissants. Probiotiques yaourt + fibres chou = microbiote renforcé.</div>
-    </div>
-  </div>
-
-  <!-- JEUDI -->
-  <div class="recipe-card" id="rec-jeudi">
-    <div class="recipe-header" onclick="toggleRecipe('rec-jeudi')">
-      <span class="recipe-emoji">🫘</span>
-      <div class="recipe-meta">
-        <p class="recipe-name">Croquettes pois chiches four + carottes + tzatziki</p>
-        <p class="recipe-subtitle">Jeudi · 25 min · Légumineuses · Anti-friction ✓</p>
-        <div class="tags-row" style="margin-top:6px">
-          <span class="tag antifr">Anti-friction ✓</span>
-          <span class="tag transv">Transversal ♻️</span>
-          <span class="tag enfant">4 ans OK</span>
-        </div>
-      </div>
-      <span class="recipe-chevron">▼</span>
-    </div>
-    <div class="recipe-body">
-      <div class="why-box">
-        🌿 <strong>Pourquoi :</strong> Les pois chiches sont riches en protéines végétales, fer et zinc. La vitamine C des carottes triple l'absorption du fer non-héminique. Cuisson four = zéro surveillance pendant 20 min pour s'occuper des enfants.
-      </div>
-      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
-      <ul class="ingredient-list">
-        <li><span class="ing-dot"></span><div>2 boîtes/bocaux pois chiches ♻️ <span class="ing-recycle">→ 3ème boîte pour houmous snack + Plan B N°2</span><span class="ing-brand">Intermarché — pois chiches+eau+sel uniquement · Yuka 90</span></div></li>
-        <li><span class="ing-dot"></span><div>1 œuf plein air (liant)<span class="ing-brand">Pâturages Intermarché · Yuka 92</span></div></li>
-        <li><span class="ing-dot"></span><div>3 c.s. farine semi-complète<span class="ing-brand">Intermarché · Yuka 82</span></div></li>
-        <li><span class="ing-dot"></span><div>Épices : 1 c.c. cumin, ½ c.c. paprika, ½ c.c. coriandre, sel</div></li>
-        <li><span class="ing-dot"></span><div>500g carottes ♻️ <span class="ing-recycle">→ aussi bâtonnets snack enfants + dimanche rôties</span></div></li>
-        <li><span class="ing-dot"></span><div>Tzatziki : concombre ♻️ (reste lundi) + 150g yaourt ♻️ + ail + citron ♻️ + menthe fraîche ♻️</div></li>
-        <li><span class="ing-dot"></span><div>Huile d'olive pour la plaque</div></li>
-      </ul>
-      <p class="recipe-section-label">Étapes</p>
-      <ol class="steps-list">
-        <li>Four à 200°C. Huiler une plaque de cuisson.</li>
-        <li>Égoutter et rincer les pois chiches. Les écraser à la fourchette (texture grossière = meilleure croquette). Ajouter œuf + farine + épices. Bien mélanger.</li>
-        <li>Former 12 galettes (~2cm d'épaisseur). Les poser sur la plaque. Enfourner 20 min, retourner à mi-cuisson.</li>
-        <li>Carottes en rondelles épaisses : sur la même plaque (autre moitié), huile + sel. Four simultané.</li>
-        <li>Tzatziki : concombre râpé, bien essorer à la main, mélanger yaourt + ail écrasé + citron + menthe + sel. Prêt en 2 min.</li>
-      </ol>
-      <div class="friction-box">✅ <strong>Anti-friction validé :</strong> 1 cuisson active (four, 1 plaque) + cru tzatziki · 1 ustensile · 0 découpe complexe</div>
-      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Croquettes sans épices (séparer portion avant d'assaisonner). Carottes rôties douces = généralement adorées. Yaourt nature comme trempette (sans ail si refus).</div>
-      <div class="synergy-box">💊 <strong>Synergie :</strong> Fer pois chiches + vitamine C carottes = absorption fer ×3. Yaourt probiotique + fibres légumineuses = microbiote diversifié.</div>
-    </div>
-  </div>
-
-  <!-- VENDREDI -->
-  <div class="recipe-card" id="rec-vendredi">
-    <div class="recipe-header" onclick="toggleRecipe('rec-vendredi')">
-      <span class="recipe-emoji">🐟</span>
-      <div class="recipe-meta">
-        <p class="recipe-name">Truite papillote fenouil-citron + boulgour herbes</p>
-        <p class="recipe-subtitle">Vendredi · 35 min · Poisson gras · Assoupli</p>
-        <div class="tags-row" style="margin-top:6px">
-          <span class="tag transv">Transversal ♻️</span>
-          <span class="tag enfant">4 ans OK</span>
-        </div>
-      </div>
-      <span class="recipe-chevron">▼</span>
-    </div>
-    <div class="recipe-body">
-      <div class="why-box">
-        🌿 <strong>Pourquoi :</strong> La truite = deuxième poisson gras de la semaine (objectif 1×/semaine respecté). La papillote est la cuisson la plus douce — zéro corps gras ajouté, tous les nutriments conservés. Le fenouil facilite la digestion et introduit une saveur anisée nouvelle.
-      </div>
-      <p class="recipe-section-label">Ingrédients (4 pers.)</p>
-      <ul class="ingredient-list">
-        <li><span class="ing-dot"></span><div>4 filets truite arc-en-ciel MSC<span class="ing-brand">Intermarché frais ou surgelés MSC · Yuka 88</span></div></li>
-        <li><span class="ing-dot"></span><div>1 fenouil (seule découpe complexe)</div></li>
-        <li><span class="ing-dot"></span><div>2 citrons ♻️ <span class="ing-recycle">→ rondelles papillote + jus boulgour</span></div></li>
-        <li><span class="ing-dot"></span><div>200g boulgour<span class="ing-brand">Celnat ou Intermarché · Yuka 88</span></div></li>
-        <li><span class="ing-dot"></span><div>150g épinards frais bio<span class="ing-brand">Intermarché bio · Yuka 95</span></div></li>
-        <li><span class="ing-dot"></span><div>Persil frais ♻️ + menthe fraîche ♻️ <span class="ing-recycle">→ restes de la semaine</span></div></li>
-        <li><span class="ing-dot"></span><div>Huile d'olive · sel · poivre</div></li>
-      </ul>
-      <p class="recipe-section-label">Étapes</p>
-      <ol class="steps-list">
-        <li>Four à 180°C. Émincer le fenouil finement (2-3 min).</li>
-        <li>Couper 4 grands rectangles de papier cuisson. Sur chacun : lit de fenouil + filet de truite + 2 rondelles citron + sel + poivre + filet huile olive. Fermer en aumônière hermétique.</li>
-        <li>Enfourner les papillotes : 20 min.</li>
-        <li>Pendant ce temps : boulgour dans casserole — couvrir d'eau bouillante à hauteur + 2cm, couvercle, 10 min hors feu.</li>
-        <li>Épinards : soit poêle 2 min avec ail + huile, soit crus à côté (si fatigue du vendredi!).</li>
-        <li>Boulgour égoutté : mélanger persil + menthe + jus citron + huile olive.</li>
-      </ol>
-      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Truite nature sans fenouil (retirer avant de fermer papillote). Proposer pâtes ou riz si boulgour refusé. Épinards crus avec un filet citron = souvent mieux acceptés.</div>
-      <div class="synergy-box">💊 <strong>Synergie :</strong> Oméga-3 truite + vitamine K épinards = santé cardiovasculaire optimale. Herbes fraîches = phytonutriments et digestion facilitée. Boulgour semi-complet = fibres pour microbiote.</div>
-    </div>
-  </div>
-
-  <!-- DIMANCHE -->
-  <div class="recipe-card" id="rec-dimanche">
-    <div class="recipe-header" onclick="toggleRecipe('rec-dimanche')">
-      <span class="recipe-emoji">🍗</span>
-      <div class="recipe-meta">
-        <p class="recipe-name">Poulet rôti + butternut rôtie (batch)</p>
-        <p class="recipe-subtitle">Dimanche · 50 min · Option A · Batch mercredi</p>
-        <div class="tags-row" style="margin-top:6px">
-          <span class="tag batch">Batch ♻️</span>
-          <span class="tag transv">Transversal ♻️</span>
-          <span class="tag enfant">4 ans OK</span>
-        </div>
-      </div>
-      <span class="recipe-chevron">▼</span>
-    </div>
-    <div class="recipe-body">
-      <div class="why-box">
-        🌿 <strong>Pourquoi :</strong> Le grand classique familial. Une plaque = repas complet + batch sécurisé. La butternut rôtie caramélise naturellement grâce à ses sucres — texture fondante adorée des enfants. Investissement 50 min dimanche = mercredi sauvé en 15 min.
-      </div>
-      <p class="recipe-section-label">Ingrédients (4 pers. + batch)</p>
-      <ul class="ingredient-list">
-        <li><span class="ing-dot"></span><div>1 poulet entier ~1,5kg plein air ♻️ <span class="ing-recycle">→ ≈30% effiloché → batch mercredi</span><span class="ing-brand">Intermarché boucherie · Yuka 85</span></div></li>
-        <li><span class="ing-dot"></span><div>1 butternut entière ♻️ <span class="ing-recycle">→ ≈30% cubes → batch mercredi bowl/soupe</span></div></li>
-        <li><span class="ing-dot"></span><div>4 gousses ail + thym frais + romarin</div></li>
-        <li><span class="ing-dot"></span><div>3 c.s. ghee ou huile avocat · paprika · sel · poivre</div></li>
-        <li><span class="ing-dot"></span><div>Option : oignons ♻️ + carottes ♻️ <span class="ing-recycle">→ restes de la semaine autour du poulet</span></div></li>
-      </ul>
-      <p class="recipe-section-label">Étapes</p>
-      <ol class="steps-list">
-        <li>Four à 200°C. Éplucher et couper la butternut en cubes ~3cm. Placer sur grande plaque huilée avec thym + sel.</li>
-        <li>Frotter le poulet entier : ghee fondu + paprika + sel + ail écrasé partout (sous la peau si possible). Poser sur la plaque ou plaque séparée.</li>
-        <li>Enfourner : butternut 35-40 min, poulet 45-50 min (jusqu'à jus clair). Même four simultané.</li>
-        <li>⚠️ BATCH : Avant de servir, effilocher environ ⅓ du poulet et mettre de côté ~200g cubes butternut. Placer dans boîte hermétique.</li>
-        <li>Congeler la portion batch ce soir même. Décongeler mardi soir au frigo.</li>
-      </ol>
-      <div class="astuce-box"><strong>👶 Astuce 4 ans :</strong> Cuisse/pilon entier = prise en main naturelle. Butternut rôtie sucrée-fondante = généralement très bien acceptée. Servir nature sans sauce.</div>
-      <div class="synergy-box">💊 <strong>Synergie :</strong> Protéines poulet complet + bêta-carotène butternut (vitamine A, immunité) + graisses ghee (absorption liposolubles). Repas anti-gaspi par excellence.</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- ═══════════════ BATCH ═══════════════ -->
-<div id="tab-batch" class="content">
-  <p class="section-title">Dimanche — Stratégie Batch</p>
-
-  <div class="info-banner">
-    🧘 <strong>Règle d'or :</strong> Choisir selon ta forme du dimanche matin. Les deux options sont bonnes. Zéro pression = engagement long terme.
-  </div>
-
-  <div class="batch-option open" id="batch-a">
-    <div class="batch-header" onclick="toggleBatch('batch-a')">
-      <span class="batch-letter a">A</span>
-      <div>
-        <p class="batch-title">Poulet rôti + Butternut rôtie</p>
-        <p class="batch-subtitle">Option recommandée · 50 min · Mercredi sécurisé</p>
-      </div>
-      <span class="batch-arrow">▼</span>
-    </div>
-    <div class="batch-body">
-      <p>🍗 <strong>Dimanche :</strong> Poulet entier rôti + butternut en cubes sur la même plaque four. Repas classique délicieux.</p>
-      <p>♻️ <strong>Batch à prévoir :</strong> Avant de servir, effilocher ~350g poulet + réserver ~200g butternut cuites. Dans une boîte hermétique → congélateur dimanche soir.</p>
-      <p>🌮 <strong>Mercredi (15 min) :</strong> Décongeler mardi soir. Réchauffer le poulet à la poêle. Assembler tacos avec chou rouge émincé + sauce yaourt-citron. Butternut : réchauffer ou servir froide en bowl.</p>
-      <div class="tags-row" style="margin-top:10px">
-        <span class="tag batch">Mercredi garanti</span>
-        <span class="tag express">15min mercredi</span>
-        <span class="tag transv">Anti-gaspi ♻️</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="batch-option" id="batch-b">
-    <div class="batch-header" onclick="toggleBatch('batch-b')">
-      <span class="batch-letter b">B</span>
-      <div>
-        <p class="batch-title">Curry lentilles corail one-pot</p>
-        <p class="batch-subtitle">Si fatigue · 40 min · Mercredi = Plan B</p>
-      </div>
-      <span class="batch-arrow">▼</span>
-    </div>
-    <div class="batch-body">
-      <p>🍛 <strong>Dimanche :</strong> Curry de lentilles corail en one-pot (lentilles + lait coco + tomates + épices). Repas complet, chaud, réconfortant. Pas de batch.</p>
-      <p>🆘 <strong>Mercredi :</strong> Utiliser Plan B N°1 (pâtes citron-parmesan) ou Plan B N°2 (bowl froid pois chiches). Ingrédients déjà dans les placards.</p>
-      <p>💡 <strong>Ingrédients supplémentaires si Option B :</strong> Lentilles corail 300g + lait de coco 1 boîte + tomates concassées 1 boîte (vérifier ingrédients).</p>
-      <div class="tags-row" style="margin-top:10px">
-        <span class="tag enfant">Sans pression</span>
-        <span class="tag express">One-pot</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top:8px; border-left: 4px solid var(--green-mid);">
-    <p style="font-size:13px; line-height:1.6; color:var(--text-muted);">
-      <strong style="color:var(--green-deep)">🔄 Flux batch en détail :</strong><br>
-      Dimanche soir → congeler portion mercredi<br>
-      Mardi soir → transférer au frigo (décongélation lente = meilleure texture)<br>
-      Mercredi → réchauffer 5 min + assembler = repas en 15 min chrono
-    </p>
-  </div>
-</div>
-
-<!-- ═══════════════ PLAN B ═══════════════ -->
-<div id="tab-planb" class="content">
-  <p class="section-title">🆘 Jokers Semaine</p>
-
-  <div class="info-banner">
-    Ces 2 plans B utilisent UNIQUEMENT des ingrédients de la liste de courses. Aucun achat supplémentaire.
-  </div>
-
-  <div class="planb-card">
-    <div class="planb-header">
-      <div class="planb-badge b1">🔥</div>
-      <div>
-        <p class="planb-title">Plan B N°1 — Chaud</p>
-        <p class="planb-sub">Pâtes citron-parmesan-persil · 10 min</p>
-      </div>
-    </div>
-    <div class="planb-body">
-      <ol>
-        <li>Porter eau à ébullition. Cuire pâtes semi-complètes 8 min.</li>
-        <li>Égoutter en conservant 2 c.s. eau de cuisson.</li>
-        <li>Dans la casserole : pâtes + huile d'olive généreuse + zeste et jus d'1 citron + eau cuisson.</li>
-        <li>Parmesan râpé + persil haché + sel + poivre. Mélanger vivement. Servir.</li>
-      </ol>
-      <p style="font-size:13px; color:var(--text-muted); margin-top:10px; font-style:italic;">Variante 4 ans : pâtes nature + parmesan sans citron si refus d'acidité.</p>
-      <div class="planb-ings">
-        <span class="planb-ing">Pâtes semi-complètes</span>
-        <span class="planb-ing">Citron ♻️</span>
-        <span class="planb-ing">Parmesan</span>
-        <span class="planb-ing">Persil ♻️</span>
-        <span class="planb-ing">Huile d'olive</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="planb-card">
-    <div class="planb-header">
-      <div class="planb-badge b2">❄️</div>
-      <div>
-        <p class="planb-title">Plan B N°2 — Froid</p>
-        <p class="planb-sub">Bowl pois chiches-crudités · 0 cuisson · 8 min</p>
-      </div>
-    </div>
-    <div class="planb-body">
-      <ol>
-        <li>Ouvrir et égoutter pois chiches. Rincer à l'eau froide.</li>
-        <li>Couper tomates cerises en deux, trancher concombre.</li>
-        <li>Vinaigrette express : huile olive + jus citron + pincée cumin + sel.</li>
-        <li>Assembler : pois chiches + tomates + concombre + vinaigrette. Ajouter feta si disponible.</li>
-        <li>Servir avec pain pita ou pain au levain.</li>
-      </ol>
-      <p style="font-size:13px; color:var(--text-muted); margin-top:10px; font-style:italic;">4 ans : pois chiches + tomates cerises + concombre + yaourt nature = assiette simple acceptée.</p>
-      <div class="planb-ings">
-        <span class="planb-ing">Pois chiches ♻️</span>
-        <span class="planb-ing">Tomates cerises ♻️</span>
-        <span class="planb-ing">Concombre ♻️</span>
-        <span class="planb-ing">Citron ♻️</span>
-        <span class="planb-ing">Feta (option)</span>
-        <span class="planb-ing">Pain pita</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="background: var(--green-pale); border: none;">
-    <p style="font-size:13px; line-height:1.7; color:var(--green-deep);">
-      <strong>📦 Ces ingrédients servent aussi aux Plans B :</strong><br>
-      Pâtes semi-complètes · Pois chiches (3ème boîte) · Citrons × 6 · Persil ♻️ · Parmesan · Tomates cerises ♻️ · Concombre ♻️ · Pain pita
-    </p>
-  </div>
-</div>
-
-<!-- ═══════════════ SNACKS ═══════════════ -->
-<div id="tab-snacks" class="content">
-  <p class="section-title">🍎 Snacks Enfants</p>
-  <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">2 idées liées aux ingrédients déjà achetés. Zéro achat supplémentaire.</p>
-
-  <div class="snack-card">
-    <p class="snack-title">🥕 Snack 1 — Carottes & houmous maison express</p>
-    <p class="snack-timing">Jeudi après-midi ou vendredi · 5 min de préparation</p>
-    <p>Utiliser la 3ème boîte de pois chiches de la liste. Mixer avec tahini (Delhaize) + jus citron + ail + sel + 2 c.s. eau froide. Servir avec bâtonnets de carottes coupés en avance.</p>
-    <div class="tags-row" style="margin-top:10px">
-      <span class="tag transv">Utilise restes ♻️</span>
-      <span class="tag enfant">4 ans OK</span>
-      <span class="tag express">5 min</span>
-    </div>
-    <div class="astuce-box" style="margin-top:10px"><strong>💡 Astuce :</strong> Préparer le houmous en avance (lundi soir). Se conserve 4 jours au frigo. Les bâtonnets de carottes sont découpés lors de la préparation du jeudi soir.</div>
-  </div>
-
-  <div class="snack-card">
-    <p class="snack-title">🍓 Snack 2 — Yaourt nature + fraises bio + miel</p>
-    <p class="snack-timing">Mardi ou mercredi · 2 min</p>
-    <p>Yaourt Pâturages (déjà acheté) + fraises bio Intermarché lavées et coupées + ½ c.c. miel pur. Assembler directement dans le bol du petit. Fraises de saison en Belgique (avril-juin ✅).</p>
-    <div class="tags-row" style="margin-top:10px">
-      <span class="tag transv">Ingrédients liste ♻️</span>
-      <span class="tag enfant">4 ans OK</span>
-      <span class="tag express">2 min</span>
-    </div>
-    <div class="astuce-box" style="margin-top:10px"><strong>💡 Astuce :</strong> Laisser les enfants "décorer" leur bol avec les fraises = implication + meilleure acceptation. Pas de sucre blanc — le miel suffit en micro-dose.</div>
-  </div>
-</div>
-
-<!-- ═══════════════ COURSES ═══════════════ -->
-<div id="tab-courses" class="content">
-  <div class="courses-header">
-    <p class="section-title" style="margin:0">🛒 Liste de courses</p>
-    <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-      <span class="counter-badge" id="counter">0/37 achetés</span>
-      <button class="reset-btn" onclick="resetAll()">Tout décocher</button>
-    </div>
-  </div>
-
-  <div class="cat-header">🥩 Viandes & Poissons</div>
-
-  <div class="course-item" id="ci-01" onclick="toggleItem('ci-01')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-01')">
-    <div class="course-label">
-      <p class="course-name">Poulet entier plein air ~1,5kg</p>
-      <span class="course-usage">→ Dimanche batch + mercredi effiloché</span>
-      <span class="course-planb">Batch ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-02" onclick="toggleItem('ci-02')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-02')">
-    <div class="course-label">
-      <p class="course-name">Filets poulet plein air 600g</p>
-      <span class="course-usage">→ Lundi tikka masala</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-03" onclick="toggleItem('ci-03')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-03')">
-    <div class="course-label">
-      <p class="course-name">Filets saumon MSC 4×150g</p>
-      <span class="course-usage">→ Mardi vapeur · vérifier logo MSC</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-04" onclick="toggleItem('ci-04')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-04')">
-    <div class="course-label">
-      <p class="course-name">Filets truite arc-en-ciel MSC 4×</p>
-      <span class="course-usage">→ Vendredi papillote · frais ou surgelés</span>
-    </div>
-  </div>
-
-  <div class="cat-header">🥚 Œufs & Laitiers</div>
-
-  <div class="course-item" id="ci-05" onclick="toggleItem('ci-05')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-05')">
-    <div class="course-label">
-      <p class="course-name">Œufs plein air ×6</p>
-      <span class="course-usage">→ Jeudi croquettes liant</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-06" onclick="toggleItem('ci-06')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-06')">
-    <div class="course-label">
-      <p class="course-name">Yaourt nature entier ×6 pots (Pâturages)</p>
-      <span class="course-usage">→ Lundi raita + jeudi tzatziki + snack + Plan B</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-07" onclick="toggleItem('ci-07')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-07')">
-    <div class="course-label">
-      <p class="course-name">Parmesan râpé ou bloc 100g</p>
-      <span class="course-usage">→ Plan B N°1 pâtes citron</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-08" onclick="toggleItem('ci-08')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-08')">
-    <div class="course-label">
-      <p class="course-name">Feta 150g (optionnel)</p>
-      <span class="course-usage">→ Plan B N°2 bowl froid</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="cat-header">🌾 Féculents & Légumineuses</div>
-
-  <div class="course-item" id="ci-09" onclick="toggleItem('ci-09')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-09')">
-    <div class="course-label">
-      <p class="course-name">Riz basmati 500g</p>
-      <span class="course-usage">→ Lundi + mercredi enfant</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-10" onclick="toggleItem('ci-10')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-10')">
-    <div class="course-label">
-      <p class="course-name">Quinoa blanc 400g (Priméal)</p>
-      <span class="course-usage">→ Mardi saumon</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-11" onclick="toggleItem('ci-11')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-11')">
-    <div class="course-label">
-      <p class="course-name">Boulgour 300g</p>
-      <span class="course-usage">→ Vendredi truite</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-12" onclick="toggleItem('ci-12')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-12')">
-    <div class="course-label">
-      <p class="course-name">Pâtes semi-complètes 500g</p>
-      <span class="course-usage">→ Plan B N°1 · vérifier ingrédients simples</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-13" onclick="toggleItem('ci-13')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-13')">
-    <div class="course-label">
-      <p class="course-name">Pois chiches ×3 boîtes/bocaux</p>
-      <span class="course-usage">→ Jeudi (×2) + snack houmous (×1) + Plan B N°2</span>
-      <span class="course-planb">Plan B + Snack ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-14" onclick="toggleItem('ci-14')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-14')">
-    <div class="course-label">
-      <p class="course-name">Tortillas blé ou pains pita ×8</p>
-      <span class="course-usage">→ Mercredi tacos + Plan B N°2</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="cat-header">🥦 Légumes Frais</div>
-
-  <div class="course-item" id="ci-15" onclick="toggleItem('ci-15')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-15')">
-    <div class="course-label">
-      <p class="course-name">Butternut ×1 entière</p>
-      <span class="course-usage">→ Dimanche rôtie + mercredi batch bowl</span>
-      <span class="course-planb">Batch ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-16" onclick="toggleItem('ci-16')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-16')">
-    <div class="course-label">
-      <p class="course-name">Fenouil ×1</p>
-      <span class="course-usage">→ Vendredi papillote</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-17" onclick="toggleItem('ci-17')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-17')">
-    <div class="course-label">
-      <p class="course-name">Chou rouge ×1 petit</p>
-      <span class="course-usage">→ Mercredi tacos + snack bâtonnets</span>
-      <span class="course-planb">Snack ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-18" onclick="toggleItem('ci-18')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-18')">
-    <div class="course-label">
-      <p class="course-name">Carottes 1kg</p>
-      <span class="course-usage">→ Jeudi rôties + snack bâtonnets + dimanche option</span>
-      <span class="course-planb">Snack ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-19" onclick="toggleItem('ci-19')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-19')">
-    <div class="course-label">
-      <p class="course-name">Concombre ×2</p>
-      <span class="course-usage">→ Lundi raita + jeudi tzatziki + Plan B N°2</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-20" onclick="toggleItem('ci-20')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-20')">
-    <div class="course-label">
-      <p class="course-name">Tomates cerises bio 500g</p>
-      <span class="course-usage">→ Mardi + mercredi + Plan B N°2</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-21" onclick="toggleItem('ci-21')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-21')">
-    <div class="course-label">
-      <p class="course-name">Épinards frais bio 150g</p>
-      <span class="course-usage">→ Vendredi truite</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-22" onclick="toggleItem('ci-22')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-22')">
-    <div class="course-label">
-      <p class="course-name">Oignons ×3</p>
-      <span class="course-usage">→ Lundi tikka + dimanche poulet</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-23" onclick="toggleItem('ci-23')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-23')">
-    <div class="course-label">
-      <p class="course-name">Ail ×1 tête</p>
-      <span class="course-usage">→ Lundi + jeudi + vendredi + dimanche</span>
-    </div>
-  </div>
-
-  <div class="cat-header">🌿 Herbes Fraîches</div>
-
-  <div class="course-item" id="ci-24" onclick="toggleItem('ci-24')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-24')">
-    <div class="course-label">
-      <p class="course-name">Persil frais ×1 bouquet</p>
-      <span class="course-usage">→ Mardi + vendredi + Plan B N°1</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-25" onclick="toggleItem('ci-25')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-25')">
-    <div class="course-label">
-      <p class="course-name">Menthe fraîche ×1 bouquet</p>
-      <span class="course-usage">→ Jeudi tzatziki + vendredi boulgour</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-26" onclick="toggleItem('ci-26')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-26')">
-    <div class="course-label">
-      <p class="course-name">Thym + romarin (frais ou séchés)</p>
-      <span class="course-usage">→ Dimanche poulet rôti</span>
-    </div>
-  </div>
-
-  <div class="cat-header">🍋 Fruits</div>
-
-  <div class="course-item" id="ci-27" onclick="toggleItem('ci-27')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-27')">
-    <div class="course-label">
-      <p class="course-name">Citrons ×6</p>
-      <span class="course-usage">→ Vinaigrettes + marinades + Plan B N°1 + toute la semaine</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-28" onclick="toggleItem('ci-28')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-28')">
-    <div class="course-label">
-      <p class="course-name">Fraises bio 250g</p>
-      <span class="course-usage">→ Snack enfants yaourt-fraises · saisonnières ✅</span>
-      <span class="course-planb">Snack ♻️</span>
-    </div>
-  </div>
-
-  <div class="cat-header">🫙 Épicerie & Condiments</div>
-
-  <div class="course-item" id="ci-29" onclick="toggleItem('ci-29')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-29')">
-    <div class="course-label">
-      <p class="course-name">Concentré tomates 1 tube (Mutti)</p>
-      <span class="course-usage">→ Lundi tikka · vérifier : tomates+sel uniquement</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-30" onclick="toggleItem('ci-30')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-30')">
-    <div class="course-label">
-      <p class="course-name">Huile d'olive 500ml (Itinéraire des Saveurs)</p>
-      <span class="course-usage">→ Finitions toute la semaine</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-31" onclick="toggleItem('ci-31')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-31')">
-    <div class="course-label">
-      <p class="course-name">Ghee ou huile avocat 200ml</p>
-      <span class="course-usage">→ Lundi poêle + dimanche poulet</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-32" onclick="toggleItem('ci-32')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-32')">
-    <div class="course-label">
-      <p class="course-name">Épices : curcuma, cumin, paprika, coriandre moulue</p>
-      <span class="course-usage">→ Lundi + jeudi + partout</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-33" onclick="toggleItem('ci-33')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-33')">
-    <div class="course-label">
-      <p class="course-name">Farine semi-complète 500g</p>
-      <span class="course-usage">→ Jeudi croquettes pois chiches</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-34" onclick="toggleItem('ci-34')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-34')">
-    <div class="course-label">
-      <p class="course-name">Miel pur 1 petit pot</p>
-      <span class="course-usage">→ Snack yaourt-fraises · miel pur = OK</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-35" onclick="toggleItem('ci-35')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-35')">
-    <div class="course-label">
-      <p class="course-name">Pain au levain artisanal</p>
-      <span class="course-usage">→ Plans B + repas libres</span>
-      <span class="course-planb">Plan B ♻️</span>
-    </div>
-  </div>
-
-  <div class="cat-header" style="background: var(--red-soft);">🏪 Compléments Delhaize</div>
-
-  <div class="course-item" id="ci-36" onclick="toggleItem('ci-36')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-36')">
-    <div class="course-label">
-      <p class="course-name">Tahini Al'Fez 250g</p>
-      <span class="course-usage">→ Snack houmous maison enfants</span>
-      <span class="course-delhaize">Delhaize</span>
-      <span class="course-planb">Snack ♻️</span>
-    </div>
-  </div>
-
-  <div class="course-item" id="ci-37" onclick="toggleItem('ci-37')">
-    <input type="checkbox" onclick="event.stopPropagation(); toggleItem('ci-37')">
-    <div class="course-label">
-      <p class="course-name">Ghee (si non disponible Intermarché)</p>
-      <span class="course-usage">→ Alternative cuisson haute température</span>
-      <span class="course-delhaize">Delhaize si besoin</span>
-    </div>
-  </div>
-
-  <div class="budget-card">
-    <div>
-      <p class="budget-label">Budget estimé</p>
-      <p style="font-size:12px; opacity:0.6; margin-top:2px;">Intermarché ~88€ + Delhaize ~20€</p>
-    </div>
-    <p class="budget-amount">~108€</p>
-  </div>
-
-  <p style="font-size:12px; color:var(--text-muted); text-align:center; padding: 8px 0 20px; font-style:italic;">Dans l'enveloppe 120€ ± 20€ ✅</p>
-</div>
+<div id="content"></div>
 
 <script>
-  const TOTAL = 37;
+// ═══════════════════════════════════════════
+// DONNÉES
+// ═══════════════════════════════════════════
+const SEMAINES = [
 
-  // Tab switching
-  function showTab(id, btn) {
-    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
+// ── S1 ──────────────────────────────────────
+{
+  label: "Semaine 1", comfort: "Pizza 🍕",
+  proteines: "Poulet (×2) · Saumon MSC · Cabillaud MSC · Pois chiches · Gnocchis-ricotta · Œufs — Viande rouge : 0",
+  budget: "~112€",
+  jours: [
+    { jour:"Lundi", emoji:"🐓", plat:"Poulet tikka masala léger + riz basmati + raita concombre", temps:"20'", tags:["af","ex","4a"] },
+    { jour:"Mardi", emoji:"🐟", plat:"Saumon vapeur + quinoa citron-persil + tomates cerises", temps:"25'", tags:["af","4a","tr"] },
+    { jour:"Mercredi", emoji:"🌮", plat:"Tacos poulet effiloché + salade chou rouge <em>ou Plan B</em>", temps:"15'", tags:["af","bt","ex","4a"] },
+    { jour:"Jeudi", emoji:"🌱", plat:"Croquettes pois chiches four + carottes rôties + tzatziki", temps:"25'", tags:["af","4a","tr"] },
+    { jour:"Vendredi", emoji:"🐟", plat:"Cabillaud pané four + purée maison + petits pois", temps:"35'", tags:["4a","tr"] },
+    { jour:"Samedi", emoji:"🍕", plat:"Pizza maison pâte levain + mozzarella + légumes de saison", temps:"45'", tags:["cf","4a"] },
+    { jour:"Dimanche", emoji:"🥘", plat:"Gratin gnocchis épinards-ricotta <em>(Batch A)</em><br>ou Soupe butternut-gingembre <em>(B)</em>", temps:"50'", tags:["bt","4a"] },
+  ],
+  recettes: [
+    { jour:"🐓 Lundi · 20 min", titre:"Poulet tikka masala léger + riz basmati + raita concombre", tags:["af","ex","4a"],
+      ings:["Escalopes poulet (600g) — Intermarché | 🟢 95","Riz basmati (200g)","Concombre (2) → raita lundi + tzatziki jeudi + Plan B","Yaourt nature (4 pots) → raita + tzatziki + snacks — Pâturages","Tomates concassées boîte (400g) — Itinéraire des Saveurs | 🟢 96","Oignon (1), ail (2 gousses), gingembre poudre (1 c.c.)","Épices tikka masala (2 c.s.) ou cumin+coriandre+paprika+curcuma","Crème de coco (100ml)","Huile d'olive, sel, coriandre ou persil"],
+      steps:["Lancer riz basmati dans casserole (eau salée, 12 min).","Couper poulet en cubes. Faire revenir dans poêle huilée 5 min à feu vif.","Ajouter oignon émincé, ail, épices. Remuer 2 min.","Verser tomates concassées + crème de coco. Mijoter 8 min.","Raita : yaourt + concombre râpé + sel + pincée cumin. Servir à part."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Portion poulet prélevée avant épices. Riz blanc + bâtonnets concombre + yaourt nature."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Curcuma + gingembre = anti-inflammatoires synergiques. Tomates cuites = lycopène biodisponible ×3."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Concombre (2) → raita lundi + tzatziki jeudi. Yaourt (4 pots) → raita + tzatziki + snacks + Plan B."},
+      ]
+    },
+    { jour:"🐟 Mardi · 25 min", titre:"Saumon vapeur + quinoa citron-persil + tomates cerises", tags:["af","4a","tr"],
+      ings:["Filets saumon MSC surgelé (600g) — Intermarché MSC | 🟢 96","Quinoa (200g) | 🟢 94","Tomates cerises BIO (250g) → mardi + mercredi + snack — Intermarché bio","Citrons (5) → toute la semaine","Bouquet persil → mardi + mercredi + Plan B","Huile d'olive, sel, poivre"],
+      steps:["Cuire quinoa rincé dans casserole (2× volume eau, 15 min).","Cuire saumon à la vapeur douce 10-12 min.","Égrener quinoa à la fourchette. Ajouter jus citron + huile + persil haché.","Servir saumon sur quinoa + tomates cerises. Zeste citron pour adultes."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Saumon vapeur nature + riz blanc à la place du quinoa + tomates cerises entières."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Saumon = oméga-3 EPA/DHA essentiels pour cerveau enfant. Vapeur = 100% des nutriments préservés."},
+      ]
+    },
+    { jour:"🌮 Mercredi · 15 min (batch)", titre:"Tacos poulet effiloché + salade chou rouge", tags:["af","bt","ex","4a"],
+      ings:["Portion poulet effiloché du batch dimanche (~300g)","Tortillas blé (4-6) — vérifier sans huile hydrogénée","Chou rouge (¼) → mercredi + bâtonnets jeudi enfant","Tomates cerises (reste), yaourt nature, citron, cumin"],
+      steps:["Décongeler poulet (sorti dimanche soir). Réchauffer poêle ou micro-ondes 3 min.","Râper chou rouge finement. Assaisonner citron + sel.","Tiédir tortillas à sec dans poêle 30 sec.","Assembler : tortilla → poulet → chou → tomates cerises → yaourt."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Poulet nature dans tortilla + riz blanc + 3 tomates cerises. Chou rouge en bâtonnets crus à côté."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Chou rouge (1 acheté) → mercredi tacos + jeudi bâtonnets crus enfant 4 ans."},
+      ]
+    },
+    { jour:"🌱 Jeudi · 25 min", titre:"Croquettes pois chiches four + carottes rôties + tzatziki", tags:["af","4a"],
+      ings:["Pois chiches boîte (2×400g) — Intermarché","Carottes (4)","Yaourt nature (2 pots, reste du lot)","Concombre (½, reste du lot)","Ail (2 gousses), cumin, paprika, persil, chapelure (2 c.s.), œuf (1)","Huile olive, citron, aneth ou menthe pour tzatziki"],
+      steps:["Four 200°C. Mixer pois chiches + ail + épices + persil + œuf + chapelure. Former 12 croquettes.","Croquettes + carottes en bâtonnets huilés sur même plaque. Four 22 min, retourner à mi-cuisson.","Tzatziki : yaourt + concombre râpé essoré + ail + citron + aneth + sel.","Servir avec bâtonnets chou rouge crus pour le 4 ans."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Croquettes à manger avec les doigts + tzatziki en dip. Carottes rôties douces et sucrées = souvent acceptées."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Pois chiches = protéines végétales + fibres + fer. Four = zéro friture. Carottes = bêta-carotène."},
+      ]
+    },
+    { jour:"🐟 Vendredi · 35 min", titre:"Cabillaud pané four + purée maison + petits pois", tags:["4a"],
+      ings:["Dos cabillaud MSC surgelé (600g) — Intermarché MSC | 🟢 96","Pommes de terre (800g, farineuses)","Petits pois surgelés (400g)","Chapelure (4 c.s.), œuf (1), farine (2 c.s.)","Beurre (30g), lait entier (10cl), sel, noix muscade","Citron (1), persil, huile olive"],
+      steps:["Four 200°C. Cuire pommes de terre vapeur ou casserole 20 min.","Paner cabillaud : farine → œuf battu → chapelure. Plaque huilée, four 15 min.","Cuire petits pois dans casserole vidée 5 min.","Écraser pommes de terre avec beurre + lait + sel + muscade.","Citron + persil sur cabillaud à la sortie du four."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Fish fingers maison ! Format familier et rassurant. Purée + petits pois = combo classique adoré."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Cabillaud = protéines maigres + iode + B12. Four = panure légère sans friture. Petits pois = vitamine C + fibres."},
+      ]
+    },
+    { jour:"🍕 Samedi · 45 min", titre:"Pizza maison pâte levain + mozzarella + légumes de saison", tags:["cf","4a"],
+      ings:["Pâte à pizza levain (1 boule) — Boulangerie Intermarché","Passata tomates (200ml, reste du lot)","Mozzarella (2 boules) — Intermarché","Courgette (1, rondelles fines), poivron (1, lamelles)","Tomates cerises (reste), basilic frais ou origan","Huile d'olive, fleur de sel"],
+      steps:["Four au max (250°C) avec plaque à l'intérieur.","Étaler pâte à la main sur papier cuisson.","Étaler passata, légumes, déchirer mozzarella, filet huile.","Glisser sur plaque chaude. Cuire 10-12 min jusqu'à bord doré.","Basilic frais + fleur de sel à la sortie."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Laisser les enfants disposer leurs garnitures = moment participatif adoré. Pizza nature mozzarella pour le plus sélectif."},
+      ]
+    },
+    { jour:"🥘 Dimanche · 50 min", titre:"Gratin gnocchis épinards-ricotta (Batch A) · Soupe butternut-gingembre (B)", tags:["bt","4a"],
+      ings:["Gnocchis de pommes de terre (800g) — Intermarché rayon frais","Épinards frais BIO (300g) — Intermarché bio","Ricotta (250g), parmesan (50g), crème (10cl)","Ail (2 gousses), noix muscade, sel, poivre","Mozzarella (1 boule) pour gratiner"],
+      steps:["Four 190°C. Faire tomber épinards avec ail 3 min dans poêle.","Mélanger ricotta + crème + muscade + sel + épinards.","Mélanger gnocchis (crus) + mélange ricotta dans plat four. Parsemer parmesan + mozzarella.","Enfourner 30 min jusqu'à gratin doré.","Réserver 30% dans boîte → congeler dimanche soir (batch mercredi)."],
+      boxes:[
+        {type:"bbat-a",lbl:"📦 Batch → Mercredi",txt:"Gratin réchauffé four 15 min + salade verte = mercredi en 15 min."},
+        {type:"bbat-b",lbl:"😴 Option B — Soupe butternut-gingembre",txt:"Butternut (1) en cubes + oignon + gingembre + bouillon + lait de coco → mixer. 35 min. Mercredi = Plan B joker."},
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Gnocchis = texture douce très appréciée. Portion avec peu d'épinards et plus de ricotta."},
+      ]
+    },
+  ],
+  planb: [
+    { num:"1", titre:"Riz basmati + œuf au plat + sauce tamari-citron", badge:"Chaud · 10 min · 2 ustensiles",
+      steps:["Cuire riz basmati (casserole, 12 min).","Faire 4 œufs au plat dans poêle huilée.","Déposer œuf sur riz. Arroser tamari + jus citron + filet huile.","4 ans : riz + œuf au plat nature + tomates cerises."],
+      ings:"Riz basmati, œufs, tamari, citron, huile olive — déjà dans la liste." },
+    { num:"2", titre:"Tartines levain + houmous express + crudités", badge:"Froid · 5 min · zéro cuisson",
+      steps:["Mixer pois chiches + ail + citron + huile + sel → houmous 2 min.","Tartiner sur pain levain grillé.","Carottes bâtonnets + tomates cerises + concombre tranché à côté.","4 ans : tartine + houmous à part pour tremper."],
+      ings:"Pois chiches, pain levain, carottes, tomates cerises, concombre, citron — déjà dans la liste." },
+  ],
+  batchDimanche: {
+    a:"Gratin gnocchis épinards-ricotta. Réserver 30% → congeler. Mercredi : réchauffer four 15 min + salade.",
+    b:"Soupe butternut-gingembre (35 min, 1 casserole). Mercredi → Plan B joker directement.",
+  },
+  snacks: [
+    { emoji:"🥕", titre:"Bâtonnets carottes-concombre + houmous express", quand:"Mercredi ou jeudi · 5 min · zéro cuisson",
+      how:"Tailler carottes et concombre en bâtonnets. Mixer pois chiches + ail + citron + huile + sel. Servir en dip. Laisser les enfants tremper eux-mêmes.", kids:"Format autonome adoré. Le trempage = jeu. Souvent mange plus de légumes crus ainsi." },
+    { emoji:"🍕", titre:"Mini-pizzas pita mozzarella-tomates cerises", quand:"Vendredi après l'école · 15 min · four",
+      how:"Couper pitas en 2. Étaler passata. Mozzarella + tomates cerises coupées. Four 8 min 200°C. Origan.", kids:"Pré-goûter du samedi pizza ! Laisser les enfants garnir leurs mini-pizzas eux-mêmes." },
+  ],
+  courses: [
+    { cat:"🐟 Poissons & Viandes", items:[
+      { id:"s1c01", lbl:"Filets saumon MSC surgelé (600g)", hints:[{t:"g","v":"→ mardi"}], store:"Intermarché MSC surgelé" },
+      { id:"s1c02", lbl:"Dos cabillaud MSC surgelé (600g)", hints:[{t:"g","v":"→ vendredi"}], store:"Intermarché MSC surgelé" },
+      { id:"s1c03", lbl:"Escalopes poulet (600g)", hints:[{t:"g","v":"→ lundi + batch dimanche"},{t:"y","v":"📦 Batch dimanche"}] },
+    ]},
+    { cat:"🥦 Légumes frais", items:[
+      { id:"s1c04", lbl:"Concombre (2)", hints:[{t:"g","v":"→ lundi raita + jeudi tzatziki"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s1c05", lbl:"Tomates cerises BIO (250g)", hints:[{t:"g","v":"→ mardi + mercredi + snack"},{t:"o","v":"🆘 Plan B n°2"}], store:"Intermarché bio" },
+      { id:"s1c06", lbl:"Carottes (5)", hints:[{t:"g","v":"→ jeudi rôties + snack bâtonnets"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s1c07", lbl:"Chou rouge (1 petit)", hints:[{t:"g","v":"→ mercredi tacos + bâtonnets jeudi"}] },
+      { id:"s1c08", lbl:"Courgette (1) + Poivron (1)", hints:[{t:"g","v":"→ samedi pizza"}] },
+      { id:"s1c09", lbl:"Épinards frais BIO (300g)", hints:[{t:"g","v":"→ dimanche gratin"}], store:"Intermarché bio" },
+      { id:"s1c10", lbl:"Oignons (2), Ail (1 tête)", hints:[{t:"g","v":"→ lundi + jeudi + dimanche"}] },
+      { id:"s1c11", lbl:"Pommes de terre (800g)", hints:[{t:"g","v":"→ vendredi purée"}] },
+      { id:"s1c12", lbl:"Citrons (5)", hints:[{t:"g","v":"→ toute la semaine"},{t:"o","v":"🆘 Plan B n°1 & 2"}] },
+    ]},
+    { cat:"🌿 Herbes fraîches", items:[
+      { id:"s1c13", lbl:"Bouquet persil", hints:[{t:"g","v":"→ mardi + mercredi + Plan B"}] },
+      { id:"s1c14", lbl:"Basilic frais ou origan séché", hints:[{t:"g","v":"→ samedi pizza"}] },
+    ]},
+    { cat:"🌾 Féculents & Céréales", items:[
+      { id:"s1c15", lbl:"Riz basmati (500g)", hints:[{t:"g","v":"→ lundi"},{t:"o","v":"🆘 Plan B n°1"}] },
+      { id:"s1c16", lbl:"Quinoa (250g)", hints:[{t:"g","v":"→ mardi"}] },
+      { id:"s1c17", lbl:"Gnocchis de pommes de terre (800g)", hints:[{t:"g","v":"→ dimanche gratin batch"},{t:"y","v":"📦 Batch dimanche"}], store:"Intermarché rayon frais" },
+      { id:"s1c18", lbl:"Tortillas blé (6)", hints:[{t:"g","v":"→ mercredi tacos"}], store:"Vérifier sans huile hydrogénée" },
+      { id:"s1c19", lbl:"Pain levain (1 miche)", hints:[{t:"g","v":"→ Plan B n°2"},{t:"o","v":"🆘 Plan B n°2"}], store:"Intermarché boulangerie" },
+      { id:"s1c20", lbl:"Pâte à pizza levain (1 boule)", hints:[{t:"g","v":"→ samedi pizza"}], store:"Boulangerie Intermarché" },
+      { id:"s1c21", lbl:"Pain pita (4)", hints:[{t:"g","v":"→ snack vendredi"}] },
+    ]},
+    { cat:"🫘 Légumineuses & Conserves", items:[
+      { id:"s1c22", lbl:"Pois chiches boîte (2×400g)", hints:[{t:"g","v":"→ jeudi croquettes + snack houmous"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s1c23", lbl:"Tomates concassées boîte (400g)", hints:[{t:"g","v":"→ lundi tikka"}] },
+      { id:"s1c24", lbl:"Passata tomates (700ml)", hints:[{t:"g","v":"→ samedi pizza + snack mini-pizzas"}] },
+      { id:"s1c25", lbl:"Petits pois surgelés (400g)", hints:[{t:"g","v":"→ vendredi purée"}] },
+      { id:"s1c26", lbl:"Crème de coco (200ml)", hints:[{t:"g","v":"→ lundi tikka"}] },
+    ]},
+    { cat:"🥚 Laitiers & Œufs", items:[
+      { id:"s1c27", lbl:"Œufs plein air (6)", hints:[{t:"g","v":"→ jeudi croquettes + Plan B n°1"},{t:"o","v":"🆘 Plan B n°1"}], store:"Intermarché Label Rouge" },
+      { id:"s1c28", lbl:"Yaourt nature (4 pots)", hints:[{t:"g","v":"→ raita + tzatziki + snacks"}], store:"Pâturages Intermarché" },
+      { id:"s1c29", lbl:"Ricotta (250g)", hints:[{t:"g","v":"→ dimanche gratin"}] },
+      { id:"s1c30", lbl:"Mozzarella (3 boules)", hints:[{t:"g","v":"→ samedi pizza + snack + dimanche gratin"}] },
+      { id:"s1c31", lbl:"Parmesan (80g)", hints:[{t:"g","v":"→ dimanche gratin + Plan B"},{t:"o","v":"🆘 Plan B n°1"}] },
+      { id:"s1c32", lbl:"Beurre (250g), Crème (20cl)", hints:[{t:"g","v":"→ vendredi purée + dimanche gratin"}] },
+    ]},
+    { cat:"🧂 Épicerie", items:[
+      { id:"s1c33", lbl:"Chapelure nature (1 paquet)", hints:[{t:"g","v":"→ jeudi croquettes + vendredi panure"}] },
+      { id:"s1c34", lbl:"Épices tikka ou cumin+coriandre+paprika+curcuma", hints:[{t:"g","v":"→ lundi"}] },
+      { id:"s1c35", lbl:"Huile d'olive", hints:[{t:"g","v":"→ toute la semaine"}] },
+    ]},
+    { cat:"🏪 Compléments Delhaize", delhaize:true, items:[
+      { id:"s1c36", lbl:"Tamari sans gluten (petite bouteille)", hints:[{t:"o","v":"🆘 Plan B n°1"}], store:"Clearspring · Delhaize" },
+    ]},
+  ],
+},
 
-  // Recipe accordion
-  function toggleRecipe(id) {
-    const card = document.getElementById(id);
-    card.classList.toggle('open');
-  }
+// ── S2 ──────────────────────────────────────
+{
+  label: "Semaine 2", comfort: "Burger 🍔",
+  proteines: "Poulet (×2) · Cabillaud MSC · Colin MSC · Bœuf haché (1×) · Lentilles vertes · Œufs — Viande rouge : 1× ✓",
+  budget: "~108€",
+  jours: [
+    { jour:"Lundi", emoji:"🐓", plat:"Poulet sauté citron-ail + riz complet + courgettes poêlées", temps:"20'", tags:["af","ex","4a"] },
+    { jour:"Mardi", emoji:"🐟", plat:"Cabillaud four croûte herbes + purée patate douce + épinards ail", temps:"25'", tags:["af","4a","tr"] },
+    { jour:"Mercredi", emoji:"🥣", plat:"Bowl bœuf effiloché riz + avocat + concombre <em>ou Plan B</em>", temps:"15'", tags:["af","bt","ex"] },
+    { jour:"Jeudi", emoji:"🌱", plat:"Dahl lentilles vertes coco-curcuma + pita + crudités", temps:"25'", tags:["af","4a","tr"] },
+    { jour:"Vendredi", emoji:"🐟", plat:"Colin MSC crème poireaux + épeautre + salade verte", temps:"35'", tags:["4a","tr"] },
+    { jour:"Samedi", emoji:"🍔", plat:"Burger maison bœuf + pain brioché + frites four + salade", temps:"45'", tags:["cf","4a"] },
+    { jour:"Dimanche", emoji:"🍝", plat:"Boulettes bœuf sauce tomate + pâtes <em>(Batch A)</em><br>ou Frittata légumes <em>(B)</em>", temps:"50'", tags:["bt","4a"] },
+  ],
+  recettes: [
+    { jour:"🐓 Lundi · 20 min", titre:"Poulet sauté citron-ail + riz complet + courgettes", tags:["af","ex","4a"],
+      ings:["Escalopes poulet (600g) — Intermarché","Riz complet (200g)","Courgettes (3 petites)","Ail (3 gousses), citron (1), persil frais, huile olive, paprika"],
+      steps:["Lancer riz complet casserole (18 min).","Couper poulet en lanières. Zester + presser citron.","Poêle feu vif : poulet 5 min + ail haché 1 min.","Ajouter courgettes en rondelles dans même poêle. 5 min feu moyen.","Déglacer jus citron + persil. Servir sur riz."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Poulet sans zeste + riz blanc + rondelles courgette + bâtonnets concombre."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Persil bouquet → lundi + jeudi dahl + Plan B. Citrons (5) → toute la semaine."},
+      ]
+    },
+    { jour:"🐟 Mardi · 25 min", titre:"Cabillaud four croûte herbes + purée patate douce + épinards ail", tags:["af","4a","tr"],
+      ings:["Cabillaud MSC surgelé (600g) — Intermarché MSC | 🟢 96","Patates douces (800g) → purée + reste snack bâtonnets","Épinards frais BIO (200g) → reste jeudi dahl — Intermarché bio","Chapelure nature, persil+ciboulette, ail (2 gousses)","Beurre (20g), huile olive, sel, muscade, citron (½)"],
+      steps:["Four 200°C. Vapeur patates douces en cubes (15 min casserole).","Chapelure+persil+ciboulette+huile sur cabillaud → plat four.","Enfourner 14 min.","Écraser patates douces + beurre + sel + muscade.","Épinards ail dans casserole vidée 2 min + citron."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Cabillaud portion sans croûte herbes + purée patate douce lisse (adore !) + tomates cerises."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Épinards (300g) → mardi + jeudi dahl. Reste patates douces → snack bâtonnets rôtis."},
+      ]
+    },
+    { jour:"🥣 Mercredi · 15 min (batch)", titre:"Bowl bœuf effiloché riz + avocat + concombre", tags:["bt","ex"],
+      ings:["Portion boulettes effilochées (batch dimanche, ~300g)","Riz blanc basmati (200g cru)","Avocats (2), concombre (1), tomates cerises","Citron (½), tamari (1 c.s.) — Clearspring Delhaize","Sel, poivre, huile sésame (optionnel) — Delhaize"],
+      steps:["Décongeler batch (sorti mardi soir). Cuire riz 12 min.","Réchauffer bœuf poêle ou micro-ondes 3 min.","Couper avocat + concombre + tomates cerises.","Bowl : riz → bœuf → légumes → tamari + citron."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Riz blanc + boulettes reconnues du dimanche + tomates cerises + bâtonnets concombre."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Concombre (2 achetés) → mercredi bowl + jeudi crudités + Plan B n°2."},
+      ]
+    },
+    { jour:"🌱 Jeudi · 25 min", titre:"Dahl lentilles vertes coco-curcuma + pita + crudités", tags:["af","4a","tr"],
+      ings:["Lentilles vertes (300g) | 🟢 99","Lait de coco (400ml) — Itinéraire des Saveurs","Tomates concassées boîte (400g)","Bouillon légumes cube sans glutamate (500ml)","Oignon (1), ail (2), gingembre, curcuma+cumin+garam masala","Épinards (reste mardi), pain pita (4), concombre+carottes crudités"],
+      steps:["Faire revenir oignon 3 min. Ajouter ail+gingembre+épices 1 min.","Verser lentilles+tomates+bouillon+lait coco. Porter à ébullition.","Réduire feu, mijoter 20 min. Épinards les 2 dernières minutes.","Servir avec pita chaud + crudités."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Dahl séparé à part pour tremper pita en morceaux. Carottes + tomates cerises."},
+        {type:"bsyn",lbl:"✨ Synergie",txt:"Curcuma + poivre noir = absorption curcumine ×20. Lentilles + pita = protéines végétales complètes."},
+      ]
+    },
+    { jour:"🐟 Vendredi · 35 min", titre:"Colin MSC crème poireaux + épeautre + salade verte", tags:["4a","tr"],
+      ings:["Colin MSC surgelé (600g) — Intermarché MSC | 🟢 96","Poireaux (3 blancs)","Crème entière (15cl) — Pâturages Intermarché","Épeautre semi-complet (200g)","Salade verte (1 cœur batavia), échalotes (2), citron, beurre (20g), thym"],
+      steps:["Épeautre casserole eau salée (25 min).","Fondre poireaux émincés au beurre dans poêle (10 min).","Déposer colin sur poireaux + crème + thym + sel. Couvrir 12 min feu doux.","Citron en fin de cuisson. Vinaigrette moutarde-citron pour salade."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Colin nature (avant crème) + riz blanc + tomates cerises. Crème poireaux à part pour tremper."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Poireaux = inuline prébiotique. Épeautre = magnésium + fibres. Colin = protéines maigres + iode."},
+      ]
+    },
+    { jour:"🍔 Samedi · 45 min", titre:"Burger maison bœuf + pain brioché + frites four + salade", tags:["cf","4a"],
+      ings:["Bœuf haché 5% MG (500g, reste du lot) — Intermarché","Pains burger briochés (4) — vérifier sans huile hydrogénée","Pommes de terre (700g) pour frites four","Salade, tomates, cornichons, moutarde","Cheddar ou emmental (4 tranches), sel, poivre, paprika"],
+      steps:["Four 220°C. Pommes de terre en frites, enrober huile+sel+paprika. Plaque four 30 min.","Former steaks hachés (125g). Assaisonner sel+poivre.","Poêle très chaude : steaks 3 min/côté. Fromage fondu 1 min.","Assembler burger avec garnitures. Servir avec frites et salade."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Mini-burger steak haché nature + pain + fromage fondu. Frites four sans épices. Moment festif adoré !"},
+      ]
+    },
+    { jour:"🍝 Dimanche · 50 min", titre:"Boulettes bœuf sauce tomate + pâtes (Batch A) · Frittata légumes (B)", tags:["bt","4a"],
+      ings:["Bœuf haché (800g total, dont ~300g batch) — Intermarché","Œufs (2), chapelure (3 c.s.), persil, ail, cumin","Passata (700ml) + tomates concassées (400g) — Itinéraire des Saveurs","Pâtes complètes (300g), parmesan (40g)"],
+      steps:["Four 200°C. Former ~20 boulettes. Enfourner 20 min.","Sauce : oignon revenu + passata + tomates + herbes. Mijoter 20 min.","Boulettes dans sauce 10 min supplémentaires.","Séparer 30% (8 boulettes + sauce) → congeler dimanche soir.","Cuire pâtes al dente. Servir avec parmesan râpé."],
+      boxes:[
+        {type:"bbat-a",lbl:"📦 Batch → Mercredi bowl",txt:"Décongeler mardi soir. Mercredi : réchauffer + riz + avocat + concombre en 15 min."},
+        {type:"bbat-b",lbl:"😴 Option B — Frittata",txt:"6 œufs + courgette + épinards + feta. Poêle allant au four 20 min. Mercredi = Plan B joker."},
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Boulettes = format adoré. Pâtes nature + parmesan + 2-3 boulettes."},
+      ]
+    },
+  ],
+  planb: [
+    { num:"1", titre:"Pâtes citron-parmesan + œuf mollet", badge:"Chaud · 10 min",
+      steps:["Pâtes 10 min + œufs mollets 6 min (2 casseroles).","Égoutter pâtes. Eau cuisson + huile + zeste+jus citron + parmesan.","Œuf mollet coupé sur le dessus. Persil haché.","4 ans : pâtes beurre + parmesan + œuf dur."],
+      ings:"Pâtes, œufs, citron, parmesan, huile olive, persil — déjà dans la liste." },
+    { num:"2", titre:"Bowl froid assemblage express", badge:"Froid · 5 min · zéro cuisson",
+      steps:["Reste riz ou épeautre froid dans bol.","Pois chiches bocal rincés + concombre + tomates cerises + avocat.","Vinaigrette citron-moutarde-tamari-huile olive.","4 ans : riz + pois chiches + tomates + concombre + yaourt."],
+      ings:"Riz/épeautre, pois chiches, concombre, tomates cerises, citron, tamari — déjà dans la liste." },
+  ],
+  batchDimanche: {
+    a:"Boulettes bœuf sauce tomate. Réserver 30% → congeler. Mercredi bowl riz-avocat-concombre en 15 min.",
+    b:"Frittata légumes (20 min, 1 poêle). Mercredi = Plan B joker.",
+  },
+  snacks: [
+    { emoji:"🍠", titre:"Bâtonnets patate douce rôtis + yaourt dip", quand:"Mercredi ou jeudi · 25 min · four",
+      how:"Couper reste patate douce en bâtonnets épais. Huile d'olive + sel + paprika. Four 200°C, 22 min. Dip : yaourt nature + pincée cumin.", kids:"Doux, sucré naturellement. Le dip yaourt = autonomie de dégustation adorée." },
+    { emoji:"🫘", titre:"Mini-pitas houmous express + crudités", quand:"Vendredi après l'école · 10 min",
+      how:"Mixer pois chiches + ail + citron + huile + sel. Tartiner sur demi-pita. Concombre + tomates cerises.", kids:"Format construction = engagement ludique. Laisser garnir leur pita eux-mêmes." },
+  ],
+  courses: [
+    { cat:"🐟 Poissons & Viandes", items:[
+      { id:"s2c01", lbl:"Cabillaud MSC surgelé (600g)", hints:[{t:"g","v":"→ mardi"}], store:"Intermarché MSC" },
+      { id:"s2c02", lbl:"Colin MSC surgelé (600g)", hints:[{t:"g","v":"→ vendredi"}], store:"Intermarché MSC" },
+      { id:"s2c03", lbl:"Escalopes poulet (600g)", hints:[{t:"g","v":"→ lundi"}] },
+      { id:"s2c04", lbl:"Bœuf haché 5% MG (1.3kg)", hints:[{t:"g","v":"→ dimanche boulettes + samedi burgers"},{t:"y","v":"📦 Batch dimanche"}] },
+    ]},
+    { cat:"🥦 Légumes frais", items:[
+      { id:"s2c05", lbl:"Courgettes (3)", hints:[{t:"g","v":"→ lundi + option B dimanche"}] },
+      { id:"s2c06", lbl:"Patates douces (1kg)", hints:[{t:"g","v":"→ mardi purée + snack bâtonnets"}] },
+      { id:"s2c07", lbl:"Épinards frais BIO (300g)", hints:[{t:"g","v":"→ mardi + jeudi dahl"}], store:"Intermarché bio" },
+      { id:"s2c08", lbl:"Poireaux (3)", hints:[{t:"g","v":"→ vendredi"}] },
+      { id:"s2c09", lbl:"Concombre (2)", hints:[{t:"g","v":"→ mercredi bowl + jeudi crudités"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s2c10", lbl:"Avocats (2)", hints:[{t:"g","v":"→ mercredi bowl"}] },
+      { id:"s2c11", lbl:"Tomates cerises BIO (250g)", hints:[{t:"g","v":"→ lundi + mercredi + snacks"},{t:"o","v":"🆘 Plan B n°2"}], store:"Intermarché bio" },
+      { id:"s2c12", lbl:"Carottes (4), Oignons (3), Ail (1 tête)", hints:[{t:"g","v":"→ jeudi + dimanche + vinaigrettes"}] },
+      { id:"s2c13", lbl:"Salade verte (1 cœur batavia)", hints:[{t:"g","v":"→ vendredi + samedi burger"}] },
+      { id:"s2c14", lbl:"Pommes de terre (700g)", hints:[{t:"g","v":"→ samedi frites four"}] },
+      { id:"s2c15", lbl:"Citrons (5)", hints:[{t:"g","v":"→ toute la semaine"},{t:"o","v":"🆘 Plan B n°1 & 2"}] },
+    ]},
+    { cat:"🌿 Herbes fraîches", items:[
+      { id:"s2c16", lbl:"Bouquet persil + ciboulette", hints:[{t:"g","v":"→ lundi + mardi + dimanche + Plan B"}] },
+    ]},
+    { cat:"🌾 Féculents & Céréales", items:[
+      { id:"s2c17", lbl:"Riz complet (300g) + Riz basmati (300g)", hints:[{t:"g","v":"→ lundi + mercredi"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s2c18", lbl:"Épeautre semi-complet (400g)", hints:[{t:"g","v":"→ vendredi"}] },
+      { id:"s2c19", lbl:"Pâtes complètes (400g)", hints:[{t:"g","v":"→ dimanche"},{t:"o","v":"🆘 Plan B n°1"}] },
+      { id:"s2c20", lbl:"Pain pita (6)", hints:[{t:"g","v":"→ jeudi dahl + snack"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s2c21", lbl:"Pains burger briochés (4)", hints:[{t:"g","v":"→ samedi"}] },
+    ]},
+    { cat:"🫘 Légumineuses & Conserves", items:[
+      { id:"s2c22", lbl:"Lentilles vertes (300g)", hints:[{t:"g","v":"→ jeudi dahl"}] },
+      { id:"s2c23", lbl:"Pois chiches bocal (400g)", hints:[{t:"g","v":"→ snack + Plan B n°2"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s2c24", lbl:"Passata (700ml) + Tomates concassées (2×400g)", hints:[{t:"g","v":"→ jeudi dahl + dimanche sauce"},{t:"y","v":"📦 Batch dimanche"}], store:"Itinéraire des Saveurs" },
+      { id:"s2c25", lbl:"Lait de coco (400ml)", hints:[{t:"g","v":"→ jeudi dahl"}], store:"Itinéraire des Saveurs" },
+    ]},
+    { cat:"🥚 Laitiers & Œufs", items:[
+      { id:"s2c26", lbl:"Œufs plein air (6)", hints:[{t:"g","v":"→ dimanche + option B + Plan B"},{t:"o","v":"🆘 Plan B n°1"}], store:"Intermarché Label Rouge" },
+      { id:"s2c27", lbl:"Crème entière (20cl)", hints:[{t:"g","v":"→ vendredi colin"}], store:"Pâturages" },
+      { id:"s2c28", lbl:"Parmesan (80g)", hints:[{t:"g","v":"→ dimanche + Plan B n°1"},{t:"o","v":"🆘 Plan B n°1"}] },
+      { id:"s2c29", lbl:"Yaourt nature (4 pots)", hints:[{t:"g","v":"→ snack dip + Plan B"}] },
+      { id:"s2c30", lbl:"Feta (100g), Beurre (250g)", hints:[{t:"g","v":"→ option B frittata + vendredi poireaux"}] },
+      { id:"s2c31", lbl:"Cheddar/emmental tranches (4)", hints:[{t:"g","v":"→ samedi burger"}] },
+    ]},
+    { cat:"🧂 Épicerie", items:[
+      { id:"s2c32", lbl:"Chapelure nature (1 paquet)", hints:[{t:"g","v":"→ mardi croûte + dimanche boulettes"}] },
+      { id:"s2c33", lbl:"Curcuma, cumin, garam masala", hints:[{t:"g","v":"→ jeudi dahl"}] },
+      { id:"s2c34", lbl:"Moutarde de Dijon (1 pot)", hints:[{t:"g","v":"→ vendredi vinaigrette + Plan B"}] },
+      { id:"s2c35", lbl:"Huile d'olive", hints:[{t:"g","v":"→ toute la semaine"}] },
+    ]},
+    { cat:"🏪 Compléments Delhaize", delhaize:true, items:[
+      { id:"s2c36", lbl:"Tamari sans gluten", hints:[{t:"g","v":"→ mercredi bowl"},{t:"o","v":"🆘 Plan B n°2"}], store:"Clearspring · Delhaize" },
+    ]},
+  ],
+},
 
-  // Batch accordion
-  function toggleBatch(id) {
-    const el = document.getElementById(id);
-    el.classList.toggle('open');
-  }
+// ── S3 ──────────────────────────────────────
+{
+  label: "Semaine 3", comfort: "Croque 🧀",
+  proteines: "Dinde (×2) · Saumon MSC · Colin MSC · Poulet · Œufs · Lentilles — Viande rouge : 0",
+  budget: "~105€",
+  jours: [
+    { jour:"Lundi", emoji:"🦃", plat:"Wok dinde émincée + nouilles soba + brocolis + sauce tamari-sésame", temps:"20'", tags:["af","ex","4a"] },
+    { jour:"Mardi", emoji:"🐟", plat:"Saumon four miso-miel + riz basmati + asperges vapeur", temps:"25'", tags:["af","4a","tr"] },
+    { jour:"Mercredi", emoji:"🌯", plat:"Wraps dinde + houmous maison + crudités <em>ou Plan B</em>", temps:"15'", tags:["af","bt","ex"] },
+    { jour:"Jeudi", emoji:"🥣", plat:"Soupe poireaux-pommes de terre + œufs mollets + tartines levain", temps:"25'", tags:["af","4a"] },
+    { jour:"Vendredi", emoji:"🐟", plat:"Colin four sauce vierge tomate-basilic + riz complet", temps:"35'", tags:["4a","tr"] },
+    { jour:"Samedi", emoji:"🧀", plat:"Croque-monsieur four jambon-fromage + soupe tomate maison", temps:"30'", tags:["cf","4a"] },
+    { jour:"Dimanche", emoji:"🍗", plat:"Poulet rôti citron-thym + légumes du four <em>(Batch A)</em><br>ou Velouté courgette-chèvre <em>(B)</em>", temps:"50'", tags:["bt","4a"] },
+  ],
+  recettes: [
+    { jour:"🦃 Lundi · 20 min", titre:"Wok dinde + nouilles soba + brocolis + tamari-sésame", tags:["af","ex","4a"],
+      ings:["Blanc de dinde (400g) — Intermarché","Nouilles soba (200g) — Delhaize rayon asiatique","Brocolis (1 tête en bouquets)","Tamari (2 c.s.), huile sésame toastée (1 c.c.), ail (2 gousses), gingembre","Oignons verts, huile avocat pour cuisson, sel, poivre"],
+      steps:["Cuire nouilles soba 5 min. Égoutter, rincer eau froide.","Poêle/wok très chaude : dinde émincée 4 min + ail + gingembre 1 min.","Ajouter bouquets brocolis dans même wok, 3 min feu vif.","Ajouter nouilles + tamari + huile sésame. Mélanger 1 min.","Servir avec oignons verts émincés."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Dinde nature + riz blanc (à la place des soba) + brocolis vapeur doux. Sauce tamari à part en mini-bol pour tremper."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Dinde = protéines maigres + tryptophane. Brocolis = vitamine C + sulforaphane anticancéreux. Soba = index glycémique bas."},
+      ]
+    },
+    { jour:"🐟 Mardi · 25 min", titre:"Saumon four miso-miel + riz basmati + asperges vapeur", tags:["af","4a","tr"],
+      ings:["Filets saumon MSC (600g) — Intermarché MSC","Riz basmati (200g)","Asperges (500g, saison !) → mardi vapeur + reste snack","Miso blanc (1 c.s.) — Clearspring Delhaize","Miel (1 c.c.), tamari (1 c.s.), huile sésame","Citron (1), sel, poivre"],
+      steps:["Four 200°C. Mélanger miso + miel + tamari + huile sésame → badigeonner saumon.","Lancer riz basmati casserole (12 min).","Enfourner saumon 14 min.","Asperges vapeur au-dessus du riz ou casserole séparée, 8 min.","Citron pressé sur saumon à la sortie."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Saumon nature (portion sans glaçage miso) + riz blanc + asperges vapeur bien tendres."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Miso = probiotiques vivants + umami. Saumon = oméga-3. Asperges = folates + prébiotiques inuline. Saison mai-juin parfaite."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Asperges (500g) → mardi vapeur + reste en snack jeudi ou bâtonnets froids."},
+      ]
+    },
+    { jour:"🌯 Mercredi · 15 min (batch)", titre:"Wraps dinde effilochée + houmous + crudités", tags:["bt","ex"],
+      ings:["Portion dinde effilochée (batch dimanche poulet OU dinde lundi ~200g)","Tortillas blé (4) — vérifier sans huile hydrogénée","Pois chiches (1/2 boîte) → houmous express","Concombre (1), carottes (2), tomates cerises","Citron (½), ail (1 gousse), huile olive, cumin, sel"],
+      steps:["Mixer pois chiches + ail + citron + huile + cumin + sel → houmous 2 min.","Réchauffer dinde poêle ou micro-ondes 2 min.","Couper crudités. Tiédir tortillas 30 sec à sec.","Assembler : tortilla → houmous → dinde → crudités → yaourt."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Wrap sans houmous si refus + dinde nature + carottes bâtonnets + tomates cerises. Laisser assembler lui-même."},
+      ]
+    },
+    { jour:"🥣 Jeudi · 25 min", titre:"Soupe poireaux-pommes de terre + œufs mollets + tartines levain", tags:["af","4a"],
+      ings:["Poireaux (3, blancs et verts tendres)","Pommes de terre (400g)","Bouillon légumes (700ml)","Œufs plein air (4) — Label Rouge Intermarché","Pain levain (4 tranches) — Intermarché boulangerie","Beurre (15g), crème (5cl optionnel), sel, poivre, ciboulette"],
+      steps:["Émincer poireaux, couper pommes de terre en cubes. Faire fondre poireaux au beurre 5 min.","Ajouter pommes de terre + bouillon. Cuire 15 min.","Pendant ce temps, cuire œufs mollets (eau bouillante, 6 min exactement, eau froide immédiatement).","Mixer soupe partiellement (laisser des morceaux). Ajuster sel + poivre.","Servir bol soupe + œuf mollet coupé dessus + tartine + ciboulette."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Soupe mixée lisse (sans morceaux) + mouillette tartine pour tremper + œuf dur (plus facile que mollet). Soupe dans bol à bec = plaisir."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Poireaux = inuline prébiotique + vitamine K. Pommes de terre = potassium. Œuf = protéines complètes + choline. Levain = meilleure digestibilité."},
+      ]
+    },
+    { jour:"🐟 Vendredi · 35 min", titre:"Colin four sauce vierge tomate-basilic + riz complet", tags:["4a","tr"],
+      ings:["Colin MSC surgelé (600g) — Intermarché MSC","Riz complet (200g)","Tomates (3 mûres) → sauce vierge + reste samedi soupe","Basilic frais (reste du bouquet)","Citron (1), ail (1 gousse), huile olive extra-vierge, sel, poivre"],
+      steps:["Cuire riz complet (18 min casserole).","Four 190°C. Colin dans plat + filet huile + sel. Enfourner 15 min.","Sauce vierge (crue) : tomates concassées + basilic + ail + huile olive + sel + citron. Mélanger.","Napper colin chaud avec sauce vierge froide au moment de servir."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Colin nature + riz complet + 3 tomates cerises. Sauce vierge à part — souvent tentée par curiosité."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Tomates (3 achetées) → vendredi sauce vierge + samedi soupe tomate. Basilic → vendredi + samedi croque."},
+      ]
+    },
+    { jour:"🧀 Samedi · 30 min", titre:"Croque-monsieur four jambon-fromage + soupe tomate maison", tags:["cf","4a"],
+      ings:["Pain de mie ou pain levain tranché épais (8 tranches)","Jambon cuit (6 tranches) — vérifier sans nitrites si possible","Emmental ou gruyère râpé (150g)","Beurre (30g), farine (2 c.s.), lait (20cl) → béchamel express","Tomates (reste), oignon (1), basilic, bouillon (20cl) → soupe","Sel, poivre, noix muscade"],
+      steps:["Soupe tomate : oignon revenu + tomates concassées + bouillon + basilic. Mijoter 15 min. Mixer.","Béchamel express : beurre fondu + farine (2 min) + lait progressivement. Sel + muscade.","Assembler croques : pain → béchamel → jambon → fromage → béchamel → pain.","Four 200°C, 12-15 min jusqu'à gratin doré. Ou poêle + couvercle."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Croque sans béchamel (juste jambon-fromage fondu) = plus simple. La soupe tomate sucrée est souvent appréciée avec des mouillettes."},
+      ]
+    },
+    { jour:"🍗 Dimanche · 50 min", titre:"Poulet rôti citron-thym (Batch A) · Velouté courgette-chèvre (B)", tags:["bt","4a"],
+      ings:["Poulet fermier entier (1.4kg) — Intermarché","Citron (1), thym frais ou séché, ail (1 tête), huile olive","Légumes du four : carottes + courgettes + oignons + pommes de terre","Sel, poivre, paprika"],
+      steps:["Four 200°C. Frotter poulet huile + sel + poivre + thym. Citron entier dans la cavité.","Disposer légumes en morceaux autour du poulet. Enfourner 50 min (arroser 2 fois).","Laisser reposer 10 min. Effilocher 30% → congeler immédiatement."],
+      boxes:[
+        {type:"bbat-a",lbl:"📦 Batch → Mercredi wraps",txt:"Sortir poulet effiloché mardi soir. Mercredi : réchauffer + assembler wraps en 15 min."},
+        {type:"bbat-b",lbl:"😴 Option B — Velouté courgette-chèvre",txt:"Courgettes (3) + oignon + bouillon → mixer + chèvre frais fondu. 30 min. Mercredi = Plan B joker."},
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Pilon ou cuisse + riz blanc + carottes rôties (adorées). Le poulet rôti = grand classique consensuel."},
+      ]
+    },
+  ],
+  planb: [
+    { num:"1", titre:"Nouilles soba froides tamari-sésame + œuf dur", badge:"Tiède · 10 min",
+      steps:["Cuire nouilles soba 5 min. Rincer eau froide.","Sauce : tamari + huile sésame + jus citron + pincée gingembre.","Œuf dur coupé sur le dessus.","4 ans : riz blanc + œuf dur + bâtonnets concombre."],
+      ings:"Soba, œufs, tamari, huile sésame, citron — déjà dans la liste." },
+    { num:"2", titre:"Tartines levain + houmous express + crudités", badge:"Froid · 5 min · zéro cuisson",
+      steps:["Pain levain grillé + houmous (pois chiches mixés).","Tomates cerises + concombre + carottes bâtonnets.","Feta émiettée sur le dessus."],
+      ings:"Pain levain, pois chiches, crudités, feta — déjà dans la liste." },
+  ],
+  batchDimanche: {
+    a:"Poulet rôti citron-thym. Effilocher 30% → congeler. Mercredi wraps en 15 min.",
+    b:"Velouté courgette-chèvre (30 min, 1 casserole). Mercredi = Plan B joker.",
+  },
+  snacks: [
+    { emoji:"🥦", titre:"Brocolis vapeur + sauce tamari-sésame dip", quand:"Mardi ou jeudi · 10 min · vapeur",
+      how:"Cuire bouquets brocolis 5 min vapeur. Tiédir. Sauce : tamari + huile sésame + citron. Souvent mieux accepté tiède que chaud.", kids:"Brocolis tièdes en bouquets = format idéal pour tremper. Sauce umami = souvent surprenant mais apprécié." },
+    { emoji:"🧀", titre:"Mini-croques pain levain + emmental fondu", quand:"Vendredi après l'école · 10 min · four",
+      how:"Tranches pain levain + emmental fondu au four 5 min à 200°C. Tomates cerises à côté. Côté festif avant le samedi croque-monsieur.", kids:"Pré-goûter du samedi ! Format simplifié sans béchamel = approuvé 4 ans." },
+  ],
+  courses: [
+    { cat:"🐟 Poissons & Viandes", items:[
+      { id:"s3c01", lbl:"Saumon MSC surgelé (600g)", hints:[{t:"g","v":"→ mardi"}], store:"Intermarché MSC" },
+      { id:"s3c02", lbl:"Colin MSC surgelé (600g)", hints:[{t:"g","v":"→ vendredi"}], store:"Intermarché MSC" },
+      { id:"s3c03", lbl:"Blanc de dinde (600g)", hints:[{t:"g","v":"→ lundi wok + batch mercredi wraps"},{t:"y","v":"📦 Batch mercredi"}] },
+      { id:"s3c04", lbl:"Poulet fermier entier (1.4kg)", hints:[{t:"g","v":"→ dimanche rôti batch"},{t:"y","v":"📦 Batch dimanche"}] },
+      { id:"s3c05", lbl:"Jambon cuit (6 tranches)", hints:[{t:"g","v":"→ samedi croque"}], store:"Vérifier sans nitrites si possible" },
+    ]},
+    { cat:"🥦 Légumes frais", items:[
+      { id:"s3c06", lbl:"Brocolis (2 têtes)", hints:[{t:"g","v":"→ lundi wok + snack"}] },
+      { id:"s3c07", lbl:"Asperges (500g) — saison !", hints:[{t:"g","v":"→ mardi vapeur + reste snack"}] },
+      { id:"s3c08", lbl:"Poireaux (3)", hints:[{t:"g","v":"→ jeudi soupe"}] },
+      { id:"s3c09", lbl:"Courgettes (3)", hints:[{t:"g","v":"→ option B dimanche velouté"}] },
+      { id:"s3c10", lbl:"Tomates (4 mûres) + Tomates cerises BIO (250g)", hints:[{t:"g","v":"→ vendredi sauce vierge + samedi soupe + snacks"}], store:"Cerises : Intermarché bio" },
+      { id:"s3c11", lbl:"Pommes de terre (700g)", hints:[{t:"g","v":"→ jeudi soupe + dimanche légumes four"}] },
+      { id:"s3c12", lbl:"Concombre (2), Carottes (3), Citrons (5)", hints:[{t:"g","v":"→ mercredi crudités + vinaigrettes"},{t:"o","v":"🆘 Plan B"}] },
+    ]},
+    { cat:"🌿 Herbes fraîches", items:[
+      { id:"s3c13", lbl:"Basilic frais (1 bouquet)", hints:[{t:"g","v":"→ vendredi sauce vierge + samedi croque"}] },
+      { id:"s3c14", lbl:"Thym frais + ciboulette", hints:[{t:"g","v":"→ dimanche poulet + jeudi soupe"}] },
+    ]},
+    { cat:"🌾 Féculents & Céréales", items:[
+      { id:"s3c15", lbl:"Nouilles soba (200g)", hints:[{t:"g","v":"→ lundi wok"},{t:"o","v":"🆘 Plan B n°1"}], store:"Delhaize rayon asiatique" },
+      { id:"s3c16", lbl:"Riz basmati (300g) + Riz complet (200g)", hints:[{t:"g","v":"→ mardi + vendredi"}] },
+      { id:"s3c17", lbl:"Tortillas blé (4)", hints:[{t:"g","v":"→ mercredi wraps"}] },
+      { id:"s3c18", lbl:"Pain levain (1 miche)", hints:[{t:"g","v":"→ jeudi tartines + Plan B"},{t:"o","v":"🆘 Plan B n°2"}], store:"Boulangerie Intermarché" },
+    ]},
+    { cat:"🫘 Légumineuses & Conserves", items:[
+      { id:"s3c19", lbl:"Pois chiches boîte (1×400g)", hints:[{t:"g","v":"→ mercredi houmous + Plan B"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s3c20", lbl:"Bouillon légumes cube (1 paquet)", hints:[{t:"g","v":"→ jeudi soupe + samedi soupe tomate"}] },
+    ]},
+    { cat:"🥚 Laitiers & Œufs", items:[
+      { id:"s3c21", lbl:"Œufs plein air (6)", hints:[{t:"g","v":"→ jeudi mollets + Plan B"},{t:"o","v":"🆘 Plan B n°1"}], store:"Intermarché Label Rouge" },
+      { id:"s3c22", lbl:"Chèvre frais (1 bûche)", hints:[{t:"g","v":"→ option B dimanche velouté"}] },
+      { id:"s3c23", lbl:"Emmental/gruyère râpé (200g)", hints:[{t:"g","v":"→ samedi croque + snack"}] },
+      { id:"s3c24", lbl:"Beurre (250g), lait entier (25cl), crème (10cl)", hints:[{t:"g","v":"→ samedi béchamel + jeudi soupe"}] },
+    ]},
+    { cat:"🏪 Compléments Delhaize", delhaize:true, items:[
+      { id:"s3c25", lbl:"Miso blanc (1 pot)", hints:[{t:"g","v":"→ mardi saumon glaçage"}], store:"Clearspring · Delhaize" },
+      { id:"s3c26", lbl:"Huile de sésame toastée", hints:[{t:"g","v":"→ lundi wok"},{t:"o","v":"🆘 Plan B n°1"}], store:"Delhaize" },
+    ]},
+  ],
+},
 
-  // Checklist
-  function updateCounter() {
-    const checked = document.querySelectorAll('.course-item input:checked').length;
-    document.getElementById('counter').textContent = checked + '/' + TOTAL + ' achetés';
-  }
+// ── S4 ──────────────────────────────────────
+{
+  label: "Semaine 4", comfort: "Pancakes 🥞",
+  proteines: "Poulet (×2) · Sole MSC · Crevettes · Haricots blancs · Œufs (×2) — Viande rouge : 0",
+  budget: "~110€",
+  jours: [
+    { jour:"Lundi", emoji:"🐓", plat:"Poulet basquaise express + riz blanc + salade", temps:"20'", tags:["af","ex","4a"] },
+    { jour:"Mardi", emoji:"🐟", plat:"Filets de sole meunière + pommes de terre vapeur + haricots verts", temps:"25'", tags:["af","4a"] },
+    { jour:"Mercredi", emoji:"🌯", plat:"Poulet basquaise effiloché + riz + poivrons <em>ou Plan B</em>", temps:"15'", tags:["af","bt","ex"] },
+    { jour:"Jeudi", emoji:"🫘", plat:"Galettes haricots blancs four + salade croquante + salsa tomate-basilic", temps:"25'", tags:["af","4a"] },
+    { jour:"Vendredi", emoji:"🦐", plat:"Crevettes sautées ail-persil + pâtes épeautre + courgettes + citron", temps:"30'", tags:["4a","tr"] },
+    { jour:"Samedi", emoji:"🥞", plat:"Pancakes salés jambon-gruyère + salade verte + œuf au plat", temps:"30'", tags:["cf","4a"] },
+    { jour:"Dimanche", emoji:"🫕", plat:"Poulet cocotte tomates-olives + pommes de terre <em>(Batch A)</em><br>ou Velouté carotte-gingembre <em>(B)</em>", temps:"50'", tags:["bt","4a"] },
+  ],
+  recettes: [
+    { jour:"🐓 Lundi · 20 min", titre:"Poulet basquaise express + riz blanc + salade", tags:["af","ex","4a"],
+      ings:["Morceaux poulet (600g, sans os ou escalopes) — Intermarché","Poivrons (2 rouges+jaunes) → lundi + batch mercredi","Tomates concassées boîte (400g) — Itinéraire des Saveurs","Oignon (1), ail (3 gousses), thym, paprika fumé, sel, poivre","Riz blanc (200g), salade verte"],
+      steps:["Faire revenir oignon + poivrons émincés dans poêle huilée 5 min.","Ajouter poulet en morceaux, dorer 3 min de chaque côté.","Verser tomates concassées + ail + thym + paprika. Couvrir, mijoter 12 min.","Servir sur riz blanc + salade verte assaisonnée.","Réserver 30% → congeler pour mercredi batch."],
+      boxes:[
+        {type:"bbat-a",lbl:"📦 Batch → Mercredi",txt:"Sortir mardi soir. Mercredi : réchauffer + riz frais + poivrons restants en 15 min."},
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Poulet sans sauce (sortir portion avant tomates) + riz blanc nature + tomates cerises. Le 6 ans peut goûter la basquaise."},
+      ]
+    },
+    { jour:"🐟 Mardi · 25 min", titre:"Filets de sole meunière + pommes de terre vapeur + haricots verts", tags:["af","4a"],
+      ings:["Filets de sole MSC (600g) — Intermarché MSC ou Delhaize","Pommes de terre (600g, petites)","Haricots verts (400g) frais ou surgelés","Beurre (40g), farine (3 c.s.) pour meunière","Citron (1), persil frais, sel, poivre"],
+      steps:["Cuire pommes de terre vapeur (15 min, casserole). Haricots verts dans même eau les 5 dernières min.","Fariner légèrement filets de sole. Faire fondre beurre dans poêle feu moyen.","Cuire filets 2-3 min/côté dans beurre mousseux. Sel + poivre.","Beurre noisette en fin de cuisson : laisser colorer 1 min. Jus citron + persil.","Servir immédiatement."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Sole meunière = texture fondante et douce, très kids-friendly. Pommes de terre vapeur + beurre. Haricots verts tendres acceptés."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Sole = poisson maigre très digeste + iode. Haricots verts = magnésium + fibres + vitamine C. Beurre noisette en petite quantité = saveur, pas excès."},
+      ]
+    },
+    { jour:"🌯 Mercredi · 15 min (batch)", titre:"Bowl poulet basquaise + riz + poivrons", tags:["bt","ex"],
+      ings:["Portion basquaise congelée (batch lundi, ~300g)","Riz blanc (200g cru)","Poivrons (1, reste du lot) → crus en lamelles","Tomates cerises, yaourt nature, persil","Citron (½), sel, poivre"],
+      steps:["Décongeler basquaise (sorti mardi soir). Cuire riz blanc 12 min.","Réchauffer basquaise poêle ou micro-ondes 4 min.","Couper poivron cru en lamelles fines + tomates cerises.","Bowl : riz → basquaise → poivrons crus → yaourt nature + citron."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Poulet de la basquaise (bien reconnu) + riz blanc + tomates cerises. Sauce à part si refus."},
+      ]
+    },
+    { jour:"🫘 Jeudi · 25 min", titre:"Galettes haricots blancs four + salade croquante + salsa tomate-basilic", tags:["af","4a"],
+      ings:["Haricots blancs boîte (2×400g)","Tomates (2) + tomates cerises (poignée) → salsa","Basilic frais (reste du bouquet)","Ail (2 gousses), oignon vert (2), cumin, paprika, chapelure (3 c.s.), œuf (1)","Salade verte, carottes, concombre pour salade","Huile olive, citron, sel, poivre"],
+      steps:["Four 200°C. Écraser haricots blancs égouttés à la fourchette (laisser des morceaux).","Mélanger avec ail + oignon vert + cumin + paprika + chapelure + œuf + sel. Former 8 galettes.","Plaque huilée, four 20 min en retournant à mi-cuisson.","Salsa : tomates concassées + basilic + huile olive + sel + citron. Mélanger.","Salade croquante : salade + carottes râpées + concombre + vinaigrette."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Galettes à manger avec les doigts + yaourt nature en dip (plus doux que salsa). Salsa à part pour adultes."},
+        {type:"bsnt",lbl:"💚 Bénéfices",txt:"Haricots blancs = protéines végétales + fibres solubles + potassium. Cuisson four = léger sans friture. Tomates crues = vitamine C maximale."},
+      ]
+    },
+    { jour:"🦐 Vendredi · 30 min", titre:"Crevettes sautées ail-persil + pâtes épeautre + courgettes + citron", tags:["4a","tr"],
+      ings:["Crevettes cuites décortiquées (400g) — Intermarché surgelé","Pâtes épeautre (300g)","Courgettes (2)","Ail (3 gousses), persil frais, citron (1)","Huile d'olive, sel, poivre, piment doux optionnel"],
+      steps:["Cuire pâtes épeautre al dente (10 min casserole). Réserver 1 louche eau de cuisson.","Couper courgettes en demi-lunes. Poêle huilée feu vif, 4 min.","Ajouter crevettes décortiquées + ail haché dans même poêle, 2 min.","Égoutter pâtes, ajouter dans poêle avec eau de cuisson + jus citron. Mélanger.","Parsemer persil haché + zeste citron."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Crevettes + pâtes épeautre + courgettes poêlées douces. Sans piment. Le citron à part sur la table."},
+        {type:"btrv",lbl:"♻️ Transversalité",txt:"Crevettes (400g achetées) → vendredi repas + reste brochettes snack samedi."},
+      ]
+    },
+    { jour:"🥞 Samedi · 30 min", titre:"Pancakes salés jambon-gruyère + salade verte + œuf au plat", tags:["cf","4a"],
+      ings:["Farine (200g), œufs (3) — Label Rouge Intermarché","Lait entier (25cl), sel, poivre, noix muscade","Jambon cuit (4 tranches)","Gruyère râpé (100g)","Salade verte + vinaigrette moutarde","Beurre pour cuisson"],
+      steps:["Mélanger farine + œufs + lait + sel + muscade. Laisser reposer 10 min.","Cuire pancakes (petits, 8cm) dans poêle beurrée, 2 min/côté.","Déposer jambon + gruyère sur pancake chaud → recouvrir 1 min pour fondre.","Cuire œufs au plat dans même poêle.","Servir avec salade verte."],
+      boxes:[
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Pancakes nature avec juste fromage fondu. Œuf au plat à côté. Format fun et festif — ils adoreront en général."},
+      ]
+    },
+    { jour:"🫕 Dimanche · 50 min", titre:"Poulet cocotte tomates-olives (Batch A) · Velouté carotte-gingembre (B)", tags:["bt","4a"],
+      ings:["Poulet (1.2kg morceaux) — Intermarché","Tomates concassées (400g) + passata (400ml)","Olives noires dénoyautées (1 boîte)","Oignon (1), ail (3 gousses), thym, laurier, herbes de Provence","Pommes de terre (600g) → dans la cocotte","Huile olive, sel, poivre"],
+      steps:["Faire dorer morceaux poulet dans cocotte huilée 5 min. Réserver.","Faire revenir oignon + ail. Ajouter tomates + passata + herbes. Porter à ébullition.","Remettre poulet + pommes de terre en cubes + olives. Couvrir, mijoter 35 min.","Séparer 30% → congeler pour mercredi batch."],
+      boxes:[
+        {type:"bbat-a",lbl:"📦 Batch → Mercredi bowl",txt:"Sortir mardi soir. Réchauffer + riz frais + crudités en 15 min."},
+        {type:"bbat-b",lbl:"😴 Option B — Velouté carotte-gingembre",txt:"Carottes (500g) + oignon + gingembre + bouillon + lait de coco → mixer. 30 min. Mercredi = Plan B joker."},
+        {type:"b4a",lbl:"🧒 Astuce 4 ans",txt:"Poulet cocotte = fondant et reconnaissable. Éviter olives dans l'assiette enfant. Pommes de terre de la cocotte = excellent."},
+      ]
+    },
+  ],
+  planb: [
+    { num:"1", titre:"Riz blanc + œuf au plat + salsa tomate express", badge:"Chaud · 10 min",
+      steps:["Riz blanc (12 min casserole) + œufs au plat dans poêle.","Tomates cerises coupées + basilic + huile olive + sel = salsa rapide.","Déposer sur riz + œuf. Pincée paprika."],
+      ings:"Riz, œufs, tomates cerises, basilic, huile olive — déjà dans la liste." },
+    { num:"2", titre:"Pancakes salés express + fromage + crudités", badge:"Chaud · 10 min",
+      steps:["Pâte pancakes : 2 œufs + 150g farine + 200ml lait + sel. Poêle anti-adhésive.","Garnir gruyère râpé + jambon ou beurre-fromage.","Salade + tomates cerises à côté."],
+      ings:"Œufs, farine, lait, gruyère, jambon — déjà dans la liste." },
+  ],
+  batchDimanche: {
+    a:"Poulet cocotte tomates-olives. Réserver 30% → congeler. Mercredi : réchauffer + riz + crudités.",
+    b:"Velouté carotte-gingembre (30 min, 1 casserole). Mercredi = Plan B joker.",
+  },
+  snacks: [
+    { emoji:"🥞", titre:"Mini-pancakes sucrés banane-miel", quand:"Mercredi goûter · 15 min",
+      how:"Même pâte pancakes salés + 1 banane écrasée + filet sirop érable. Format mini (cuillère à soupe). Servir avec yaourt nature.", kids:"Retrouver la pâte du samedi dans un format goûter. Très apprécié." },
+    { emoji:"🦐", titre:"Brochettes crevettes-concombre froides", quand:"Vendredi après l'école · 5 min · zéro cuisson",
+      how:"Crevettes cuites (reste) + bâtonnets concombre alternés sur piques. Sauce citron-huile olive à tremper. Format festif.", kids:"Format brochette = ludique. Les enfants aiment assembler eux-mêmes." },
+  ],
+  courses: [
+    { cat:"🐟 Poissons & Viandes", items:[
+      { id:"s4c01", lbl:"Filets de sole MSC (600g)", hints:[{t:"g","v":"→ mardi meunière"}], store:"Intermarché MSC ou Delhaize" },
+      { id:"s4c02", lbl:"Crevettes cuites décortiquées (400g)", hints:[{t:"g","v":"→ vendredi + snack brochettes"}], store:"Intermarché surgelé" },
+      { id:"s4c03", lbl:"Poulet morceaux (1.8kg total)", hints:[{t:"g","v":"→ lundi basquaise batch + dimanche cocotte"},{t:"y","v":"📦 Batch lundi + dimanche"}] },
+      { id:"s4c04", lbl:"Jambon cuit (6 tranches)", hints:[{t:"g","v":"→ samedi pancakes + Plan B"},{t:"o","v":"🆘 Plan B n°2"}] },
+    ]},
+    { cat:"🥦 Légumes frais", items:[
+      { id:"s4c05", lbl:"Poivrons (3 rouges+jaunes)", hints:[{t:"g","v":"→ lundi basquaise + mercredi bowl"}] },
+      { id:"s4c06", lbl:"Courgettes (2)", hints:[{t:"g","v":"→ vendredi crevettes"}] },
+      { id:"s4c07", lbl:"Tomates (3) + Tomates cerises BIO (250g)", hints:[{t:"g","v":"→ jeudi salsa + lundi + snack"},{t:"o","v":"🆘 Plan B n°1"}], store:"Cerises : Intermarché bio" },
+      { id:"s4c08", lbl:"Haricots verts (400g)", hints:[{t:"g","v":"→ mardi sole"}] },
+      { id:"s4c09", lbl:"Pommes de terre (1.2kg)", hints:[{t:"g","v":"→ mardi vapeur + dimanche cocotte"}] },
+      { id:"s4c10", lbl:"Carottes (5)", hints:[{t:"g","v":"→ option B velouté + salade jeudi"}] },
+      { id:"s4c11", lbl:"Salade verte (1 cœur), Concombre (2), Citrons (5)", hints:[{t:"g","v":"→ samedi + jeudi + vinaigrettes"},{t:"o","v":"🆘 Plan B"}] },
+    ]},
+    { cat:"🌿 Herbes fraîches", items:[
+      { id:"s4c12", lbl:"Basilic frais + persil frais", hints:[{t:"g","v":"→ jeudi salsa + vendredi crevettes + Plan B"}] },
+    ]},
+    { cat:"🌾 Féculents & Céréales", items:[
+      { id:"s4c13", lbl:"Riz blanc (400g)", hints:[{t:"g","v":"→ lundi + mercredi"},{t:"o","v":"🆘 Plan B n°1"}] },
+      { id:"s4c14", lbl:"Pâtes épeautre (300g)", hints:[{t:"g","v":"→ vendredi crevettes"}] },
+      { id:"s4c15", lbl:"Farine (300g)", hints:[{t:"g","v":"→ samedi pancakes + mardi meunière"},{t:"o","v":"🆘 Plan B n°2"}] },
+    ]},
+    { cat:"🫘 Légumineuses & Conserves", items:[
+      { id:"s4c16", lbl:"Haricots blancs boîte (2×400g)", hints:[{t:"g","v":"→ jeudi galettes"}] },
+      { id:"s4c17", lbl:"Olives noires dénoyautées (1 boîte)", hints:[{t:"g","v":"→ dimanche cocotte"}] },
+      { id:"s4c18", lbl:"Tomates concassées (400g) + Passata (400ml)", hints:[{t:"g","v":"→ lundi basquaise + dimanche cocotte"},{t:"y","v":"📦 Batch"}], store:"Itinéraire des Saveurs" },
+      { id:"s4c19", lbl:"Lait de coco (400ml)", hints:[{t:"g","v":"→ option B velouté gingembre"}] },
+    ]},
+    { cat:"🥚 Laitiers & Œufs", items:[
+      { id:"s4c20", lbl:"Œufs plein air (8)", hints:[{t:"g","v":"→ samedi pancakes + Plan B + jeudi galettes"},{t:"o","v":"🆘 Plan B n°1 & 2"}], store:"Intermarché Label Rouge" },
+      { id:"s4c21", lbl:"Lait entier (50cl)", hints:[{t:"g","v":"→ samedi pancakes"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s4c22", lbl:"Gruyère râpé (200g)", hints:[{t:"g","v":"→ samedi pancakes + Plan B"},{t:"o","v":"🆘 Plan B n°2"}] },
+      { id:"s4c23", lbl:"Beurre (250g), yaourt nature (4 pots)", hints:[{t:"g","v":"→ mardi meunière + snacks + Plan B"}] },
+    ]},
+    { cat:"🧂 Épicerie", items:[
+      { id:"s4c24", lbl:"Chapelure nature", hints:[{t:"g","v":"→ jeudi galettes haricots"}] },
+      { id:"s4c25", lbl:"Paprika fumé, cumin, herbes de Provence", hints:[{t:"g","v":"→ lundi basquaise + dimanche cocotte"}] },
+    ]},
+  ],
+}
+]; // fin SEMAINES
 
-  function toggleItem(id) {
-    const item = document.getElementById(id);
-    const cb = item.querySelector('input[type="checkbox"]');
-    cb.checked = !cb.checked;
-    if (cb.checked) {
-      item.classList.add('checked');
-      try { localStorage.setItem('menu1_' + id, '1'); } catch(e) {}
-    } else {
-      item.classList.remove('checked');
-      try { localStorage.removeItem('menu1_' + id); } catch(e) {}
-    }
-    updateCounter();
-  }
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let currentWeek = 1; // index 0-3
+let currentTab = 'menu';
 
-  function resetAll() {
-    document.querySelectorAll('.course-item').forEach(item => {
-      const cb = item.querySelector('input[type="checkbox"]');
-      cb.checked = false;
-      item.classList.remove('checked');
-      try { localStorage.removeItem('menu1_' + item.id); } catch(e) {}
-    });
-    updateCounter();
-  }
+// ═══════════════════════════════════════════
+// TAG HELPERS
+// ═══════════════════════════════════════════
+const TAG_MAP = {
+  af: ['t-af','Anti-friction ✓'],
+  ex: ['t-ex','Express'],
+  '4a':['t-4a','4 ans OK'],
+  bt: ['t-bt','Batch ♻️'],
+  tr: ['t-tr','Transversal ♻️'],
+  cf: ['t-cf','Comfort Food 🧡'],
+};
+function renderTags(arr) {
+  return '<div class="tags">' + arr.map(t => {
+    const [cls,lbl] = TAG_MAP[t]||['',''];
+    return `<span class="tag ${cls}">${lbl}</span>`;
+  }).join('') + '</div>';
+}
 
-  // Load saved state
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.course-item').forEach(item => {
-      try {
-        if (localStorage.getItem('menu1_' + item.id) === '1') {
-          const cb = item.querySelector('input[type="checkbox"]');
-          cb.checked = true;
-          item.classList.add('checked');
-        }
-      } catch(e) {}
-    });
-    updateCounter();
+// ═══════════════════════════════════════════
+// DAY → CSS class
+// ═══════════════════════════════════════════
+const DAY_CLASS = {Lundi:'dc-lundi',Mardi:'dc-mardi',Mercredi:'dc-mercredi',Jeudi:'dc-jeudi',Vendredi:'dc-vendredi',Samedi:'dc-samedi',Dimanche:'dc-dimanche'};
+
+// ═══════════════════════════════════════════
+// RENDERERS
+// ═══════════════════════════════════════════
+function renderMenu(s) {
+  let h = `<div class="pbar"><strong>Protéines :</strong> ${s.proteines}</div>`;
+  s.jours.forEach(j => {
+    const dc = DAY_CLASS[j.jour]||'';
+    h += `<div class="card ${dc}">
+      <div class="mcard">
+        <div class="mcard-day"><span class="mcard-emoji">${j.emoji}</span><span class="mcard-dayname">${j.jour}</span></div>
+        <div class="mcard-body"><div class="mcard-plat">${j.plat}</div>${renderTags(j.tags)}</div>
+        <div class="mcard-time">${j.temps}</div>
+      </div>
+    </div>`;
   });
-</script>
+  return h;
+}
 
+function renderBox(b) {
+  const isbbat = b.type.startsWith('bbat');
+  const cls = isbbat ? `bbat ${b.type}` : `box ${b.type}`;
+  return `<div class="${cls}"><div class="blbl">${b.lbl}</div>${b.txt}</div>`;
+}
+
+function renderRecettes(s) {
+  return s.recettes.map((r,i) => {
+    const id = `r_${currentWeek}_${i}`;
+    const ings = r.ings.map(x => `<li>${x}</li>`).join('');
+    const steps = r.steps.map(x => `<li>${x}</li>`).join('');
+    const boxes = (r.boxes||[]).map(renderBox).join('');
+    return `<div class="rcard">
+      <div class="rhead" onclick="toggleR('${id}')">
+        <div class="rhead-left">
+          <div class="rjour">${r.jour}</div>
+          <div class="rtitre">${r.titre}</div>
+          ${renderTags(r.tags)}
+        </div>
+        <span class="rchev" id="ch_${id}">▼</span>
+      </div>
+      <div class="rbody" id="rb_${id}">
+        <div class="rsec">Ingrédients</div>
+        <ul class="ings">${ings}</ul>
+        <div class="rsec">Étapes</div>
+        <ol class="steps">${steps}</ol>
+        ${boxes}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderPlanB(s) {
+  const cards = s.planb.map(p => `
+    <div class="pcard">
+      <div class="pnum">${p.num}</div>
+      <div class="ptitle">${p.titre}</div>
+      <span class="pbadge">${p.badge}</span>
+      <ul class="psteps">${p.steps.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <div class="pings">${p.ings}</div>
+    </div>`).join('');
+  const batch = `<div class="batch-box">
+    <div class="batch-title">🗓️ Dimanche — Choix batch</div>
+    <div class="bbat bbat-a"><div class="blbl">✅ Option A — Batch</div>${s.batchDimanche.a}</div>
+    <div class="bbat bbat-b" style="margin-top:8px"><div class="blbl">😴 Option B — Normal</div>${s.batchDimanche.b}</div>
+  </div>`;
+  return `<div class="planb-intro">🆘 2 jokers 10 min · ingrédients déjà dans la liste · zéro course supplémentaire</div>${cards}${batch}`;
+}
+
+function renderSnacks(s) {
+  return s.snacks.map(sn => `
+    <div class="scard">
+      <div class="shdr"><span class="semoji">${sn.emoji}</span><div class="stitle">${sn.titre}</div></div>
+      <div class="swhen">${sn.quand}</div>
+      <div class="show">${sn.how}</div>
+      <div class="box b4a" style="margin-top:8px"><div class="blbl">🧒 4 ans</div>${sn.kids}</div>
+    </div>`).join('');
+}
+
+function renderCourses(s) {
+  const id_prefix = `s${currentWeek+1}`;
+  let h = `<div class="budget">
+    <div><div class="blabel">Budget estimé</div><div class="bsub">Intermarché + Delhaize</div></div>
+    <div style="text-align:right"><div class="bamt">${s.budget}</div><div class="bsub">Objectif 120€±20€ ✓</div></div>
+  </div>
+  <div class="ctop">
+    <span class="cpteur" id="cpteur">0 / 0 achetés</span>
+    <button class="creset" onclick="resetAll()">↺ Tout décocher</button>
+  </div>`;
+  s.courses.forEach(cat => {
+    const extraCls = cat.delhaize ? ' style="color:var(--terra)"' : '';
+    h += `<div class="ccat"${extraCls}>${cat.cat}</div>`;
+    cat.items.forEach(item => {
+      const storedKey = `mf_${item.id}`;
+      const hints = (item.hints||[]).map(hint => {
+        const cls = hint.t==='g'?'chint-g':hint.t==='o'?'chint-o':'chint-y';
+        return `<span class="chint ${cls}">${hint.v}</span>`;
+      }).join('');
+      const store = item.store ? `<span class="cstore">${item.store}</span>` : '';
+      const dlCls = cat.delhaize ? ' delhaize' : '';
+      h += `<div class="citem${dlCls}" onclick="clickItem(event,'${item.id}')">
+        <input type="checkbox" id="${item.id}" onchange="checkItem(this)">
+        <label for="${item.id}">${item.lbl}${hints}${store}</label>
+      </div>`;
+    });
+  });
+  return h;
+}
+
+// ═══════════════════════════════════════════
+// RENDER DISPATCH
+// ═══════════════════════════════════════════
+function render() {
+  const s = SEMAINES[currentWeek];
+  let html = '';
+  if (currentTab === 'menu') html = renderMenu(s);
+  else if (currentTab === 'recettes') html = renderRecettes(s);
+  else if (currentTab === 'planb') html = renderPlanB(s);
+  else if (currentTab === 'snacks') html = renderSnacks(s);
+  else if (currentTab === 'courses') html = renderCourses(s);
+  document.getElementById('content').innerHTML = html;
+  if (currentTab === 'courses') { restoreCourses(); updateCpteur(); }
+}
+
+// ═══════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════
+function switchWeek(idx, btn) {
+  currentWeek = parseInt(idx);
+  document.querySelectorAll('.wbtn').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  render();
+}
+
+function switchTab(name, btn) {
+  currentTab = name;
+  document.querySelectorAll('.nbtn').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  render();
+}
+
+// ═══════════════════════════════════════════
+// ACCORDEON RECETTES
+// ═══════════════════════════════════════════
+function toggleR(id) {
+  const rb = document.getElementById('rb_'+id);
+  const ch = document.getElementById('ch_'+id);
+  if (!rb) return;
+  const open = rb.classList.contains('open');
+  rb.classList.toggle('open', !open);
+  if (ch) ch.classList.toggle('open', !open);
+}
+
+// ═══════════════════════════════════════════
+// CHECKLIST
+// ═══════════════════════════════════════════
+function checkItem(cb) {
+  const lbl = document.querySelector(`label[for="${cb.id}"]`);
+  if (cb.checked) {
+    if (lbl) lbl.classList.add('done');
+    try { localStorage.setItem('mf_'+cb.id,'1'); } catch(e){}
+  } else {
+    if (lbl) lbl.classList.remove('done');
+    try { localStorage.removeItem('mf_'+cb.id); } catch(e){}
+  }
+  updateCpteur();
+}
+
+function clickItem(e, id) {
+  if (e.target.tagName==='INPUT'||e.target.tagName==='LABEL') return;
+  const cb = document.getElementById(id);
+  if (!cb) return;
+  cb.checked = !cb.checked;
+  checkItem(cb);
+}
+
+function restoreCourses() {
+  document.querySelectorAll('.citem input[type=checkbox]').forEach(cb => {
+    try {
+      if (localStorage.getItem('mf_'+cb.id)) {
+        cb.checked = true;
+        const lbl = document.querySelector(`label[for="${cb.id}"]`);
+        if (lbl) lbl.classList.add('done');
+      }
+    } catch(e){}
+  });
+}
+
+function updateCpteur() {
+  const all = document.querySelectorAll('.citem input[type=checkbox]');
+  const checked = document.querySelectorAll('.citem input[type=checkbox]:checked');
+  const el = document.getElementById('cpteur');
+  if (el) el.textContent = checked.length + ' / ' + all.length + ' achetés';
+}
+
+function resetAll() {
+  document.querySelectorAll('.citem input[type=checkbox]').forEach(cb => {
+    cb.checked = false;
+    const lbl = document.querySelector(`label[for="${cb.id}"]`);
+    if (lbl) lbl.classList.remove('done');
+    try { localStorage.removeItem('mf_'+cb.id); } catch(e){}
+  });
+  updateCpteur();
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+function init() {
+  const wbtns = document.querySelectorAll('.wbtn');
+  const nbtns = document.querySelectorAll('.nbtn');
+  if (wbtns.length > 1) wbtns[1].classList.add('on');
+  if (nbtns.length > 0) nbtns[0].classList.add('on');
+  currentWeek = 1;
+  currentTab = 'menu';
+  render();
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
 </body>
 </html>
